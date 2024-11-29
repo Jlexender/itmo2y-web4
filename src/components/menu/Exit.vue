@@ -7,7 +7,7 @@ const showYes = ref(true)
 const exit = ref('Вы действительно хотите выйти из моей лабы?')
 
 const handleYes = () => {
-  exit.value = 'Эй! Не нужно уходить из моей лабы!'
+  exit.value = 'Эй! Не нужно выходить из моей лабы!'
   showYes.value = false
 }
 </script>
@@ -46,12 +46,12 @@ img {
 
 .text-block {
   position: absolute;
-  width: 50%;
+  width: 60%;
   top: 25%;
-  left: 40%;
-  font-size: 2vw;
+  left: 35%;
   color: #2727b6;
   text-align: center;
+  font-size: 5rem;
   font-family: 'Century Gothic', sans-serif;
 }
 
@@ -60,7 +60,7 @@ img {
   width: 50%;
   top: 50%;
   left: 40%;
-  font-size: 1.5vw;
+  font-size: 3rem;
   font-family: 'Century Gothic', sans-serif;
 }
 
@@ -69,7 +69,7 @@ ul {
   display: flex;
   justify-content: center;
   padding: 0;
-  gap: 10vw;
+  gap: 40%;
   margin: 0;
 }
 
@@ -80,7 +80,6 @@ li {
 }
 
 li:hover {
-  cursor: pointer;
   color: #ea7d00;
 }
 </style>

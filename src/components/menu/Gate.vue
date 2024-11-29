@@ -25,17 +25,22 @@ const handleMouseLeave = () => {
       @mouseover="handleMouseOver"
       @mouseleave="handleMouseLeave"
       @click="changeView('Exit')"
-  >
-    Gate
-  </div>
+  />
 </template>
 
 <style scoped>
 .clickable-rectangle {
-  background-color: #b9ffae;
+
   position: absolute;
-  width: 100px;
-  height: 100px;
+  left: 76.5%;
+  top: 50%;
+
+  width: 8rem;
+  height: 17rem;
   z-index: 2;
+
+  transform: skewY(-10deg);
+
 }
+
 </style>

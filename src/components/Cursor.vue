@@ -31,9 +31,9 @@ onUnmounted(() => {
 <style scoped>
 .cursor {
   position: absolute;
-  width: 1.5vw;
+  width: 2rem;
   height: auto;
-  transform: translate(-50%, -50%);
   z-index: 100;
+  pointer-events: none;
 }
 </style>

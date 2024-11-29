@@ -13,8 +13,10 @@ const handleHoverUpdate = (hovered) => {
   <div>
     <Gate @update:hovered="handleHoverUpdate" />
 
-    <img v-if="!isExitHovered" src="@/assets/img/mainmenu_ground.jpg" alt="Game menu" class="game-element"/>
-    <img v-else src="@/assets/img/mainmenu_hover.jpg" alt="Game exit" class="game-element"/>
+    <transition name="fade" mode="in-out">
+      <img v-if="!isExitHovered" src="@/assets/img/mainmenu_ground.jpg" alt="Game menu" class="game-element"/>
+      <img v-else src="@/assets/img/mainmenu_hover.jpg" alt="Game exit" class="game-element"/>
+    </transition>
   </div>
 </template>
 
@@ -26,4 +28,15 @@ img {
   object-fit: contain;
 }
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to, .fade-leave-from {
+  opacity: 1;
+}
 </style>
