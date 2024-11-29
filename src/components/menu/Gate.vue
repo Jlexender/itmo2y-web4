@@ -34,8 +34,8 @@ const handleMouseLeave = () => {
   left: 76.5%;
   top: 50%;
 
-  width: 6%;
-  height: 25%;
+  width: 8rem;
+  height: 17rem;
   z-index: 2;
 
   transform: skewY(-10deg);

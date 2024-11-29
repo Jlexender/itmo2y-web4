@@ -20,10 +20,10 @@ const handleYes = () => {
       {{ exit }}
     </div>
 
-    <div class="choice">
+    <div class="choice game-element">
       <ul>
-        <li @click="handleYes" :style="{ visibility: showYes ? 'visible' : 'hidden' }">Да</li>
-        <li @click="changeView('Main')">Нет</li>
+        <li class="game-element" @click="handleYes" :style="{ visibility: showYes ? 'visible' : 'hidden' }">Да</li>
+        <li class="game-element" @click="changeView('Main')">Нет</li>
       </ul>
     </div>
   </div>
@@ -46,21 +46,20 @@ img {
 
 .text-block {
   position: absolute;
-  width: 60%;
-  top: 25%;
-  left: 35%;
+  width: 55rem;
+  top: 30%;
+  left: 40%;
   color: #2727b6;
   text-align: center;
-  font-size: 5rem;
+  font-size: 3.5rem;
   font-family: 'Century Gothic', sans-serif;
 }
 
 .choice {
   position: absolute;
-  width: 50%;
+  width: 40%;
   top: 50%;
-  left: 40%;
-  font-size: 3rem;
+  left: 43%;
   font-family: 'Century Gothic', sans-serif;
 }
 
@@ -75,7 +74,7 @@ ul {
 
 li {
   display: inline;
-  font-size: 1.5em;
+  font-size: 4rem;
   color: #2727b6;
 }
 

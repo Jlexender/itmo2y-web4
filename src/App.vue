@@ -8,14 +8,12 @@ const view = ref('Disclaimer');
 </script>
 
 <template>
-  <div class="screen">
-    <div class="game">
-      <transition name="fade" mode="in-out">
-        <Disclaimer v-if="view === 'Disclaimer'" />
-        <Splashscreen v-else-if="view === 'Splashscreen'" />
-        <Menu v-else />
-      </transition>
-    </div>
+  <div class="game debug">
+    <transition name="fade" mode="in-out">
+      <Disclaimer v-if="view === 'Disclaimer'" />
+      <Splashscreen v-else-if="view === 'Splashscreen'" />
+      <Menu v-else />
+    </transition>
   </div>
 
   <button @click="view = 'Splashscreen'">Splashscreen</button>
@@ -35,16 +33,6 @@ const view = ref('Disclaimer');
   position: relative;
   background-color: #000;
   outline: red solid 2px;
-}
-
-.screen {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background-color: #000;
 }
 
 .fade-enter-active, .fade-leave-active {
