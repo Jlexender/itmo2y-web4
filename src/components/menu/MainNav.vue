@@ -1,9 +1,16 @@
 <script setup>
 
+const gateSound = new Audio(new URL('@/assets/audio/menu_gate.ogg', import.meta.url));
+
+const playGateSound = () => {
+  gateSound.play();
+};
+
+defineEmits(['toExit']);
 </script>
 
 <template>
-  <div class="transparent exit-area">
+  <div class="transparent exit-area" @mouseenter="playGateSound" @click="$emit('toExit')">
     Exit
   </div>
 

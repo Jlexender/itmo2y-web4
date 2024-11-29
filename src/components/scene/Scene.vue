@@ -4,6 +4,7 @@ import {ref} from "vue";
 import Disclaimer from "@/components/intro/Disclaimer.vue";
 import Splash from "@/components/intro/Splash.vue";
 import Menu from "@/components/menu/Menu.vue";
+import Exit from "@/components/menu/Exit.vue";
 
 const views = [
   Disclaimer,

@@ -4,15 +4,9 @@
 
 <template>
   <div>
-    <img src="@/assets/img/disclaimer.jpg" alt="Disclaimer"/>
+    <img src="@/assets/img/disclaimer.jpg" alt="Disclaimer" class="game-canvas"/>
   </div>
 </template>
 
 <style scoped>
-img {
-  position: absolute;
-  width: 1920px;
-  height: 1080px;
-}
-
 </style>
