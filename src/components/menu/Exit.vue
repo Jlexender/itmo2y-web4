@@ -1,84 +1,27 @@
 <script setup>
-import {inject, ref} from "vue";
 
-const changeView = inject('changeView');
-
-const showYes = ref(true)
-const exit = ref('Вы действительно хотите выйти из моей лабы?')
-
-const handleYes = () => {
-  exit.value = 'Эй! Не нужно выходить из моей лабы!'
-  showYes.value = false
-}
+const exitMessage = "Вы действительно хотите выйти из моей лабы?";
 </script>
 
 <template>
   <div>
-    <img src="@/assets/img/exit.jpg" alt="Game exit" class="game-element"/>
+    <img src="@/assets/img/exit.jpg" alt="Exit" />
 
-    <div class="text-block">
-      {{ exit }}
+    <div>
+      {{ exitMessage }}
     </div>
 
-    <div class="choice game-element">
-      <ul>
-        <li class="game-element" @click="handleYes" :style="{ visibility: showYes ? 'visible' : 'hidden' }">Да</li>
-        <li class="game-element" @click="changeView('Main')">Нет</li>
-      </ul>
-    </div>
+    <ul>
+      <li>
+        <button @click="$emit('exit')">Да</button>
+      </li>
+      <li>
+        <button @click="$emit('back')">Нет</button>
+      </li>
+    </ul>
   </div>
 </template>
 
 <style scoped>
-@font-face {
-  font-family: 'Century Gothic';
-  src: url('@/assets/fonts/CenturyGothic.ttf') format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
 
-img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.text-block {
-  position: absolute;
-  width: 55rem;
-  top: 30%;
-  left: 40%;
-  color: #2727b6;
-  text-align: center;
-  font-size: 3.5rem;
-  font-family: 'Century Gothic', sans-serif;
-}
-
-.choice {
-  position: absolute;
-  width: 40%;
-  top: 50%;
-  left: 43%;
-  font-family: 'Century Gothic', sans-serif;
-}
-
-ul {
-  list-style-type: none;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  gap: 40%;
-  margin: 0;
-}
-
-li {
-  display: inline;
-  font-size: 4rem;
-  color: #2727b6;
-}
-
-li:hover {
-  color: #ea7d00;
-}
 </style>

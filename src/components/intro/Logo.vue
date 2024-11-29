@@ -3,16 +3,19 @@
 </script>
 
 <template>
-  <img src="../../assets/img/logo_night.png" alt="Game logo" class="game-element logo"/>
+  <div>
+    <img src="@/assets/img/logo_day.png" alt="Logo" />
+  </div>
 </template>
 
 <style scoped>
-.logo {
+
+img {
   position: absolute;
-  width: 60%;
-  height: auto;
+  width: 50vw;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  object-fit: contain;
 }
 </style>
