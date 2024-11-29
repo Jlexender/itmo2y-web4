@@ -5,7 +5,13 @@ const page = Main
 </script>
 
 <template>
-  <component :is="page"/>
+  <div>
+    <audio autoplay loop>
+      <source src="@/assets/audio/blow_with_the_fires.ogg" type="audio/ogg"/>
+    </audio>
+
+    <component :is="page"/>
+  </div>
 </template>
 
 <style scoped>

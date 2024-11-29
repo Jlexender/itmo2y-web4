@@ -2,7 +2,6 @@
 
 </script>
 
-<!-- FIXME BAD CODE !!!! -->
 <template>
   <div class="transparent exit-area">
     Exit
@@ -12,9 +11,6 @@
     Start
   </div>
 
-  <div class="transparent options-area">
-    Options
-  </div>
 </template>
 
 <style scoped>
@@ -24,35 +20,22 @@
 
 .exit-area {
   position: absolute;
-  top: 50%;
-  left: 75%;
-  width: 10%;
-  height: 25vh;
+  bottom: 24%;
+  right: 16%;
+  width: 150px;
+  height: 280px;
   background-color: red;
-  color: white;
-  font-size: 40px;
-  transform: skewY(-10deg);
+  transform: skewY(-8deg);
 }
 
 .start-area {
   position: absolute;
-  top: 24%;
-  left: 24%;
-  width: 17vw;
-  height: 57vh;
-  background-color: blue;
-  color: white;
-  font-size: 40px;
-  transform: skewY(-6deg);
+  bottom: 20%;
+  left: 23%;
+  width: 330px;
+  height: 615px;
+  transform: skewY(-9deg);
+  background-color: green;
 }
 
-.options-area {
-  position: absolute;
-  top: 76%;
-  left: 55%;
-  width: 13vw;
-  height: 21vh;
-  background-color: green;
-  font-size: 40px;
-}
 </style>

@@ -1,7 +1,3 @@
-<script setup>
-
-</script>
-
 <template>
   <div>
     <img src="@/assets/img/logo_day.png" alt="Logo"/>
@@ -9,13 +5,11 @@
 </template>
 
 <style scoped>
-
 img {
   position: absolute;
-  width: 50vw;
-  left: 50%;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  object-fit: contain;
+  width: 55%;
 }
 </style>

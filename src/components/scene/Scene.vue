@@ -7,6 +7,7 @@ import Menu from "@/components/menu/Menu.vue";
 
 const views = [
   Disclaimer,
+  Splash,
   Menu,
 ];
 
@@ -29,9 +30,13 @@ const handleClick = () => {
 
 <style scoped>
 .scene {
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: 1920px;
+  height: 1080px;
   overflow: hidden;
+  outline: 3px solid red;
 }
 
 .cross-fade-enter-active,

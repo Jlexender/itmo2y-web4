@@ -11,9 +11,8 @@
 <style scoped>
 img {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
-  object-fit: contain;
+  width: 1920px;
+  height: 1080px;
 }
 
 </style>
