@@ -2,39 +2,32 @@
 import Splashscreen from "@/components/intro/Splashscreen.vue";
 import { ref } from "vue";
 import Disclaimer from "@/components/intro/Disclaimer.vue";
-import Menu from "@/components/menu/Menu.vue";
+import Menu from "@/components/menu/Base.vue";
+import Gate from "@/components/menu/Gate.vue";
+import Cursor from "@/components/Cursor.vue";
 
-const show = ref('Disclaimer');
+const view = ref('Disclaimer');
 </script>
 
 <template>
-  <div class="half debug">
+  <div class="full debug">
+    <Cursor/>
     <transition name="fade" mode="in-out">
-      <Disclaimer v-if="show === 'Disclaimer'" />
-      <Splashscreen v-else-if="show === 'Splashscreen'" />
+      <Disclaimer v-if="view === 'Disclaimer'" />
+      <Splashscreen v-else-if="view === 'Splashscreen'" />
       <Menu v-else />
     </transition>
   </div>
-  <button @click="show = 'Splashscreen'">Show Splashscreen</button>
-  <button @click="show = 'Menu'">Show Menu</button>
-  <button @click="show = 'Disclaimer'">Show Disclaimer</button>
+  <button @click="view = 'Splashscreen'">Show Splashscreen</button>
+  <button @click="view = 'Menu'">Show Menu</button>
+  <button @click="view = 'Disclaimer'">Show Disclaimer</button>
 </template>
 
 
 <style scoped>
-.half {
-  width: 50vw;
-  height: 50vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-}
-
 .full {
-  width: 100vw;
-  height: 100vh;
+  width: 1920px;
+  height: 1080px;
   display: flex;
   justify-content: center;
   align-items: center;

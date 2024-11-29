@@ -1,5 +1,4 @@
 .game-element {
-    position: absolute;
     -webkit-user-drag: none;
     user-select: none;
 }
@@ -11,6 +10,7 @@
 .debug {
     outline: 2px solid #ff0000;
     background-color: #ffdddd;
+    cursor: none;
 }
 
 .debug * {
@@ -25,5 +25,7 @@
     top: 0;
     left: 0;
 }
+
+
 
 

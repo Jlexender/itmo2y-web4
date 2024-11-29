@@ -1,33 +1,41 @@
 <script setup>
-import { ref } from 'vue';
+import {ref, defineEmits, inject} from 'vue';
 
-const isHovered = ref(false);
+const isExitHovered = ref(false);
 const gateSound = new Audio(new URL('@/assets/audio/menu_gate.ogg', import.meta.url));
+const emit = defineEmits(['update:hovered']);
+
+const changeView = inject('changeView');
 
 const handleMouseOver = () => {
   gateSound.play();
-  isHovered.value = true;
+  isExitHovered.value = true;
+  emit('update:hovered', true);
 };
 
 const handleMouseLeave = () => {
-  isHovered.value = false;
+  isExitHovered.value = false;
+  emit('update:hovered', false);
 };
 </script>
 
 <template>
   <div
-      class="clickable-rectangle"
+      class="clickable-rectangle game-element"
       @mouseover="handleMouseOver"
-      @mouseleave="handleMouseLeave">
+      @mouseleave="handleMouseLeave"
+      @click="changeView('Exit')"
+  >
+    Gate
   </div>
 </template>
 
 <style scoped>
 .clickable-rectangle {
-  position: sticky;
-  width: 8%;
-  height: 25%;
-  top: 55%;
-  left: 75%;
+  background-color: #b9ffae;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  z-index: 2;
 }
 </style>
