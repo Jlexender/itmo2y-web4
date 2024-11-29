@@ -23,10 +23,10 @@ setTimeout(() => {
 <style scoped>
 @keyframes moveUp {
   0% {
-    transform: translateY(0);
+    transform: translateY(-5%);
   }
   100% {
-    transform: translateY(-50%);
+    transform: translateY(-45%);
   }
 }
 

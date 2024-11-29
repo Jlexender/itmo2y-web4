@@ -1,15 +1,15 @@
 <script setup>
-
+import Gate from "@/components/menu/Gate.vue";
 </script>
 
 <template>
   <div class="container">
-    <img src="../../assets/img/mainmenu_ground.jpg" alt="Game menu" class="game-element"/>
 
-
+    <img src="@/assets/img/mainmenu_ground.jpg" alt="Game menu" class="game-element"/>
+    <Gate />
 
     <audio autoplay loop>
-      <source src="../../assets/audio/blow_with_the_fires.ogg" type="audio/ogg">
+      <source src="@/assets/audio/blow_with_the_fires.ogg" type="audio/ogg">
     </audio>
   </div>
 </template>
