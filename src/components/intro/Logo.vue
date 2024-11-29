@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <img src="@/assets/img/logo_day.png" alt="Logo" />
+    <img src="@/assets/img/logo_day.png" alt="Logo"/>
   </div>
 </template>
 

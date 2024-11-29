@@ -1,11 +1,8 @@
-<script setup>
-import MainNav from "@/components/menu/MainNav.vue";
-</script>
+<script setup></script>
 
 <template>
   <div>
-    <img src="@/assets/img/mainmenu_ground.jpg" alt="Main menu" />
-    <MainNav />
+    <img src="@/assets/img/mainmenu_ground.jpg" alt="Main menu"/>
   </div>
 </template>
 

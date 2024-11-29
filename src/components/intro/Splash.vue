@@ -3,33 +3,30 @@
 import Logo from "@/components/intro/Logo.vue";
 </script>
 
+<!-- FIXME: FIX SPLASHSCREEN ANIMATION -->
 <template>
   <div>
-    <img src="@/assets/img/splashscreen_day.png" alt="Splashscreen" class="move-up-half" />
-    <Logo />
+    <img src="@/assets/img/splashscreen_day.png" alt="Splashscreen"/>
+    <Logo/>
   </div>
 
 </template>
 
 <style scoped>
-@keyframes moveUpHalf {
+@keyframes moveUp {
   0% {
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-50%);
+    transform: translateY(-100vh);
   }
-}
-
-.move-up-half {
-  animation: moveUpHalf 5s ease-out forwards;
 }
 
 img {
   position: absolute;
-  width: 100%;
-  height: 200%;
+  width: 100vw;
+  height: 200vh;
   object-fit: contain;
+  animation: moveUp 6s ease-out forwards;
 }
-
 </style>

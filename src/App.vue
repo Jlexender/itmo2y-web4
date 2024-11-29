@@ -3,7 +3,7 @@ import Scene from "@/components/scene/Scene.vue";
 </script>
 
 <template>
-  <Scene />
+  <Scene/>
 </template>
 
 <style scoped>

@@ -5,7 +5,7 @@ const exitMessage = "Вы действительно хотите выйти и�
 
 <template>
   <div>
-    <img src="@/assets/img/exit.jpg" alt="Exit" />
+    <img src="@/assets/img/exit.jpg" alt="Exit"/>
 
     <div>
       {{ exitMessage }}

@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <img src="@/assets/img/disclaimer.jpg" alt="Disclaimer" />
+    <img src="@/assets/img/disclaimer.jpg" alt="Disclaimer"/>
   </div>
 </template>
 

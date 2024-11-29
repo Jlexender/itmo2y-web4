@@ -2,6 +2,7 @@
 
 </script>
 
+<!-- FIXME BAD CODE !!!! -->
 <template>
   <div class="transparent exit-area">
     Exit
@@ -25,7 +26,7 @@
   position: absolute;
   top: 50%;
   left: 75%;
-  width: 7vw;
+  width: 10%;
   height: 25vh;
   background-color: red;
   color: white;
