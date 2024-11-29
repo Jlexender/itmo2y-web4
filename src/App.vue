@@ -8,7 +8,7 @@ const view = ref('Disclaimer');
 </script>
 
 <template>
-  <div class="game debug">
+  <div class="game">
     <transition name="fade" mode="in-out">
       <Disclaimer v-if="view === 'Disclaimer'" />
       <Splashscreen v-else-if="view === 'Splashscreen'" />
@@ -24,8 +24,7 @@ const view = ref('Disclaimer');
 
 <style scoped>
 .game {
-  width: 1920px;
-  height: 1080px;
+  aspect-ratio: 16 / 9;
   display: flex;
   justify-content: center;
   align-items: center;
