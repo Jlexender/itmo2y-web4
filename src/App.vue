@@ -1,18 +1,15 @@
 <script setup>
 import Splashscreen from "@/components/intro/Splashscreen.vue";
-import { ref } from "vue";
+import {onMounted, ref} from "vue";
 import Disclaimer from "@/components/intro/Disclaimer.vue";
 import Menu from "@/components/menu/Base.vue";
-import Gate from "@/components/menu/Gate.vue";
-import Cursor from "@/components/Cursor.vue";
 
 const view = ref('Disclaimer');
 </script>
 
 <template>
-  <div class="game-screen">
+  <div class="screen">
     <div class="game">
-      <Cursor/>
       <transition name="fade" mode="in-out">
         <Disclaimer v-if="view === 'Disclaimer'" />
         <Splashscreen v-else-if="view === 'Splashscreen'" />
@@ -21,9 +18,9 @@ const view = ref('Disclaimer');
     </div>
   </div>
 
-  <button @click="view = 'Splashscreen'">Show Splashscreen</button>
-  <button @click="view = 'Menu'">Show Menu</button>
-  <button @click="view = 'Disclaimer'">Show Disclaimer</button>
+  <button @click="view = 'Splashscreen'">Splashscreen</button>
+  <button @click="view = 'Menu'">Menu</button>
+  <button @click="view = 'Disclaimer'">Disclaimer</button>
 </template>
 
 
@@ -36,20 +33,18 @@ const view = ref('Disclaimer');
   align-items: center;
   overflow: hidden;
   position: relative;
-  padding: 0;
+  background-color: #000;
+  outline: red solid 2px;
 }
 
-.user-screen {
+.screen {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   background-color: #000;
-}
-
-button {
-  margin-top: 10px;
 }
 
 .fade-enter-active, .fade-leave-active {

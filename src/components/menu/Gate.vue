@@ -30,13 +30,12 @@ const handleMouseLeave = () => {
 
 <style scoped>
 .clickable-rectangle {
-
   position: absolute;
   left: 76.5%;
   top: 50%;
 
-  width: 8rem;
-  height: 17rem;
+  width: 6%;
+  height: 25%;
   z-index: 2;
 
   transform: skewY(-10deg);
