@@ -11,7 +11,7 @@ const playGateSound = () => {
   gateSound.play();
 };
 
-const emit = defineEmits(['toExit', 'openGates', 'closeGates', 'toOptions', 'toStart']);
+const emit = defineEmits(['toExit', 'toOptions', 'toStart', 'openGates', 'closeGates']);
 
 const handleExitEnter = () => {
   playGateSound();

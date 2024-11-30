@@ -1,17 +1,26 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import {ref, onMounted, inject} from "vue";
 import Disclaimer from "@/components/intro/Disclaimer.vue";
 import Splash from "@/components/intro/Splash.vue";
 import Menu from "@/components/menu/Root.vue";
 import Cursor from "@/components/Cursor.vue";
+import Game from "@/components/game/Game.vue";
 
-const views = [Disclaimer, Splash, Menu];
+const mode = ref('default');
+const name = ref('cross-fade');
+const views = [Disclaimer, Splash, Menu, Game];
 const viewId = ref(0);
 
-const handleClick = () => {
+const nextScene = () => {
   if (viewId.value < views.length - 1) {
     viewId.value++;
   }
+};
+
+const startGame = () => {
+  mode.value = 'out-in';
+  name.value = 'long-fade';
+  nextScene();
 };
 
 const scaleScene = () => {
@@ -41,8 +50,12 @@ onMounted(() => {
 <template>
   <Cursor />
   <div class="scene">
-    <transition name="cross-fade">
-      <component :is="views[viewId]" @click="handleClick" @toMain="handleClick"/>
+    <transition :name="name" :mode="mode">
+      <component :is="views[viewId]"
+                 @toSplash="nextScene"
+                 @toMain="nextScene"
+                 @toStart="startGame"
+      />
     </transition>
   </div>
 </template>
@@ -68,6 +81,21 @@ onMounted(() => {
 
 .cross-fade-enter-to,
 .cross-fade-leave-from {
+  opacity: 1;
+}
+
+.long-fade-enter-active,
+.long-fade-leave-active {
+  transition: opacity 2s ease-in-out;
+}
+
+.long-fade-enter-from,
+.long-fade-leave-to {
+  opacity: 0;
+}
+
+.long-fade-enter-to,
+.long-fade-leave-from {
   opacity: 1;
 }
 </style>

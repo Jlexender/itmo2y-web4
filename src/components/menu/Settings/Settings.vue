@@ -13,8 +13,8 @@ defineEmits(['toMain']);
 
 <template>
   <div>
-    <img src="@/assets/img/history_bg.jpg" alt="Options" class="game-canvas"/>
-    <img src="@/assets/img/preferences_bg.jpg" alt="Options 2" class="game-canvas"/>
+    <img src="@/assets/img/history_bg.jpg" alt="Options" class="game-canvas" draggable="false"/>
+    <img src="@/assets/img/preferences_bg.jpg" alt="Options 2" class="game-canvas" draggable="false"/>
 
     <header>
       <span class="star">☆</span> Настройки <span class="star">☆</span>

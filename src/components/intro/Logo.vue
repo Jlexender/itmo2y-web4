@@ -17,7 +17,7 @@ if (time >= 10 && time < 18) {
 
 <template>
   <div>
-    <img :src="logoPath" alt="Logo"/>
+    <img :src="logoPath" alt="Logo" draggable="false"/>
   </div>
 </template>
 

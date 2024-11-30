@@ -14,7 +14,7 @@ defineEmits(['dontExit'])
 
 <template>
   <div>
-    <img src="@/assets/img/exit.jpg" alt="Game exit" class="game-canvas"/>
+    <img src="@/assets/img/exit.jpg" alt="Game exit" class="game-canvas" draggable="false"/>
 
     <div class="text-block">
       {{ exit }}

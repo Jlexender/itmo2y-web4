@@ -1,6 +1,6 @@
 <script setup>
 import Main from "@/components/menu/Main.vue";
-import {onMounted, provide, ref, watch} from "vue";
+import {onMounted, onUnmounted, provide, ref, watch} from "vue";
 import Exit from "@/components/menu/Exit.vue";
 import Options from "@/components/menu/Settings/Settings.vue";
 
@@ -32,6 +32,17 @@ onMounted(() => {
   menuMusic.play();
 });
 
+onUnmounted(() => {
+  setInterval(() => {
+    if (menuMusic.volume > 0.01) {
+      menuMusic.volume -= 0.01;
+    } else {
+      menuMusic.pause();
+    }
+  }, 30);
+});
+defineEmits(['toStart']);
+
 provide('volume', volume);
 </script>
 
@@ -44,6 +55,7 @@ provide('volume', volume);
                  @dontExit="setView('main')"
                  @toOptions="setView('options')"
                  @toMain="setView('main')"
+                 @toStart="$emit('toStart')"
       />
     </transition>
   </div>

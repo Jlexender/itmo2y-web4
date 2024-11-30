@@ -4,14 +4,14 @@ import {ref} from "vue";
 
 const showGate = ref(false);
 
-defineEmits(['toExit', 'toOptions']);
+defineEmits(['toExit', 'toOptions', 'toStart']);
 </script>
 
 <template>
   <div class="container">
-    <img src="@/assets/img/mainmenu_ground.jpg" alt="Main menu" class="game-canvas"/>
+    <img src="@/assets/img/mainmenu_ground.jpg" alt="Main menu" class="game-canvas" draggable="false"/>
     <transition name="fade" appear>
-      <img v-if="showGate" src="@/assets/img/mainmenu_hover.jpg" alt="Main menu" class="game-canvas"/>
+      <img v-if="showGate" src="@/assets/img/mainmenu_hover.jpg" alt="Main menu" class="game-canvas" draggable="false"/>
     </transition>
 
 
@@ -19,6 +19,7 @@ defineEmits(['toExit', 'toOptions']);
              @toOptions="$emit('toOptions')"
              @openGates="showGate = true"
              @closeGates="showGate = false"
+             @toStart="$emit('toStart')"
     />
   </div>
 </template>
