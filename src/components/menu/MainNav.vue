@@ -73,7 +73,7 @@ const handleExitEnter = () => {
   background-color: white;
 }
 
-.start-area:hover{
+.start-area:hover {
   opacity: 0.2;
   background-color: #ffffff;
 }

@@ -1,5 +1,8 @@
 <script setup>
-import {inject, onMounted, onUnmounted, ref} from "vue";
+import {inject, onMounted, onUnmounted, provide, ref} from "vue";
+import Plot from "@/components/game/Plot.vue";
+import Girl from "@/components/game/Girl.vue";
+import Blank from "@/components/game/Blank.vue";
 
 const bgPath = ref(null);
 const time = new Date().getHours();
@@ -10,6 +13,9 @@ if (time >= 10 && time < 18) {
 } else {
   bgPath.value = new URL('@/assets/img/ext_beach_night.jpg', import.meta.url);
 }
+
+const cRadius = ref(0);
+provide('cRadius', cRadius);
 
 const volume = inject('volume');
 const bgMusic = new Audio(new URL('@/assets/audio/lets_be_friends.ogg', import.meta.url));
@@ -33,6 +39,17 @@ onUnmounted(() => {
 });
 
 defineEmits(['toMain']);
+
+const notSad = ref(true);
+
+const makeSad = () => {
+  notSad.value = false;
+}
+
+const makeHappy = () => {
+  notSad.value = true;
+}
+
 </script>
 
 <template>
@@ -42,6 +59,13 @@ defineEmits(['toMain']);
     <div class="to-menu" @click="$emit('toMain')">
       В меню
     </div>
+
+    <Blank/>
+    <Plot
+        @makeSad="makeSad"
+        @makeHappy="makeHappy"
+    />
+    <Girl :notSad="notSad"/>
   </div>
 </template>
 
@@ -55,6 +79,7 @@ defineEmits(['toMain']);
   font-family: "Century Gothic", sans-serif;
   color: white;
   transition: 0.5s;
+  z-index: 1;
 }
 
 .to-menu:hover {

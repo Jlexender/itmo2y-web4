@@ -1,6 +1,6 @@
 <script setup>
 import Main from "@/components/menu/Main.vue";
-import {inject, onMounted, onUnmounted, provide, ref, watch} from "vue";
+import {inject, onMounted, onUnmounted, ref, watch} from "vue";
 import Exit from "@/components/menu/Exit.vue";
 import Options from "@/components/menu/Settings/Settings.vue";
 
@@ -24,9 +24,11 @@ watch(volume, (newValue) => {
 
 onMounted(() => {
   setView('main');
-  menuMusic.loop = true;
-  menuMusic.volume = volume.value;
-  menuMusic.play();
+  setTimeout(() => {
+    menuMusic.loop = true;
+    menuMusic.volume = volume.value;
+    menuMusic.play();
+  }, 500);
 });
 
 onUnmounted(() => {

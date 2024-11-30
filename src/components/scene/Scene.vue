@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted, inject, watch, provide} from "vue";
+import {onMounted, provide, ref} from "vue";
 import Disclaimer from "@/components/intro/Disclaimer.vue";
 import Splash from "@/components/intro/Splash.vue";
 import Menu from "@/components/menu/Root.vue";
@@ -55,7 +55,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Cursor />
+  <Cursor/>
   <div class="scene">
     <transition :name="name" :mode="mode">
       <component :is="views[Object.keys(views)[viewId]]"
