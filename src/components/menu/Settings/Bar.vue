@@ -95,6 +95,7 @@ label {
   outline: none;
   opacity: 0;
   pointer-events: auto;
+  cursor: none;
 }
 
 .custom-slider::-webkit-slider-thumb {
@@ -103,7 +104,6 @@ label {
   height: 35px;
   background: linear-gradient(180deg, #61af4c, #9cda69);
   border: 3px inset #7a1600;
-  cursor: pointer;
   border-radius: 0;
 }
 
@@ -112,7 +112,6 @@ label {
   height: 35px;
   background: linear-gradient(180deg, #61af4c, #9cda69);
   border: 3px inset #7a1600;
-  cursor: pointer;
   border-radius: 0;
 }
 </style>

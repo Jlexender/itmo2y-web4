@@ -12,17 +12,28 @@ setTimeout(() => {
   showLogo();
 }, 4000);
 
+const imgPath = ref(null);
+
+const time = new Date().getHours();
+
+if (time >= 10 && time < 18) {
+  imgPath.value = new URL('@/assets/img/splashscreen_day.png', import.meta.url);
+} else if (time >= 4 && time < 10) {
+  imgPath.value = new URL('@/assets/img/splashscreen_sunset.png', import.meta.url);
+} else {
+  imgPath.value = new URL('@/assets/img/splashscreen_night.png', import.meta.url);
+}
+
 const emit = defineEmits(['toMain']);
 
 setTimeout(() => {
   emit('toMain');
 }, 7000);
-
 </script>
 
 <template>
   <div>
-    <img src="@/assets/img/splashscreen_day.png" alt="Splashscreen" class="game-canvas"/>
+    <img :src="imgPath" alt="Splashscreen" class="game-canvas"/>
     <transition name="fade" appear>
       <Logo v-if="logo"/>
     </transition>

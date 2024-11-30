@@ -10,12 +10,10 @@ body {
     padding: 0;
     background-color: black;
     color: white;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
+    cursor: none;
 }
+
 
 .game-canvas {
     position: absolute;

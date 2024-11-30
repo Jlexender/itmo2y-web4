@@ -68,7 +68,7 @@ header {
   left: 50px;
   font-size: 58px;
   font-family: "Century Gothic", sans-serif;
-  cursor: pointer;
+  cursor: none;
   color: gray;
 }
 

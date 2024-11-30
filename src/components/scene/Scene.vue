@@ -3,7 +3,7 @@ import { ref, onMounted } from "vue";
 import Disclaimer from "@/components/intro/Disclaimer.vue";
 import Splash from "@/components/intro/Splash.vue";
 import Menu from "@/components/menu/Root.vue";
-import Exit from "@/components/menu/Exit.vue";
+import Cursor from "@/components/Cursor.vue";
 
 const views = [Disclaimer, Splash, Menu];
 const viewId = ref(0);
@@ -39,6 +39,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <Cursor />
   <div class="scene">
     <transition name="cross-fade">
       <component :is="views[viewId]" @click="handleClick" @toMain="handleClick"/>

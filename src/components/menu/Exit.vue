@@ -5,8 +5,8 @@ const exit = ref('Вы действительно хотите выйти из �
 const showYes = ref(true)
 
 const handleYes = () => {
-  exit.value = 'Эй! Не нужно выходить из моей лабы!'
-  showYes.value = false
+  exit.value = 'Эй! Не нужно выходить из моей лабы!';
+  showYes.value = false;
 }
 
 defineEmits(['dontExit'])
@@ -61,7 +61,7 @@ ul {
 li {
   display: inline;
   font-size: 64px;
-  color: #2727b6;
+  color: #397bf1;
 }
 
 li:hover {
