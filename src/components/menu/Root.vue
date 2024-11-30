@@ -25,7 +25,6 @@ watch(volume, (newValue) => {
   menuMusic.volume = newValue;
 });
 
-
 onMounted(() => {
   setView('main');
   setTimeout(() => {

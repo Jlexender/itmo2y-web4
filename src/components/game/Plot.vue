@@ -8,7 +8,18 @@ const cRadius = inject('cRadius');
 const emit = defineEmits(['makeSad', 'makeHappy']);
 watch(cRadius, drawCanvas);
 
+const plotDots = [];
+
+function redrawDots() {
+  const canvas = canvasRef.value;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxes(ctx);
+  plotDots.forEach(dot => drawDot(ctx, dot.x, dot.y, dot.color));
+}
+
 function drawDot(ctx, x, y, color) {
+  plotDots.push({x, y, color});
   ctx.fillStyle = color;
   ctx.beginPath();
   ctx.arc(x, y, 7, 0, Math.PI * 2);
@@ -84,6 +95,8 @@ function drawCanvas() {
   drawArc(ctx, centerX, centerY, 50 * cRadius.value, 0, Math.PI / 2, drawColor);
   drawRect(ctx, centerX - 100 * cRadius.value, centerY - 100 * cRadius.value, 100 * cRadius.value, 100 * cRadius.value, drawColor);
   drawTriangle(ctx, centerX, centerY, centerX - 100 * cRadius.value, centerY, centerX, centerY + 50 * cRadius.value, drawColor);
+
+  redrawDots();
 }
 
 const handleClick = (event) => {

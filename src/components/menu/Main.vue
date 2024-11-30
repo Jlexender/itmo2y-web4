@@ -4,7 +4,7 @@ import {ref} from "vue";
 
 const showGate = ref(false);
 
-defineEmits(['toExit', 'toOptions', 'toStart', 'toLogin', 'toRegister']);
+defineEmits(['toExit', 'toOptions', 'toStart', 'toLogin']);
 </script>
 
 <template>
@@ -18,7 +18,6 @@ defineEmits(['toExit', 'toOptions', 'toStart', 'toLogin', 'toRegister']);
     <MainNav @closeGates="showGate = false"
              @openGates="showGate = true"
              @toLogin="$emit('toLogin')"
-             @toRegister="$emit('toRegister')"
              @toExit="$emit('toExit')"
              @toOptions="$emit('toOptions')"
              @toStart="$emit('toStart')"
