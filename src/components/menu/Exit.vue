@@ -30,13 +30,6 @@ defineEmits(['dontExit'])
 </template>
 
 <style scoped>
-@font-face {
-  font-family: 'Century Gothic';
-  src: url('@/assets/fonts/Century-Gothic.ttf') format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 .text-block {
   position: absolute;
   top: 28%;

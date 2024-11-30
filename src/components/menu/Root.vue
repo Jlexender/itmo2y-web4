@@ -1,8 +1,8 @@
 <script setup>
 import Main from "@/components/menu/Main.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, provide, ref, watch} from "vue";
 import Exit from "@/components/menu/Exit.vue";
-import Options from "@/components/menu/Options.vue";
+import Options from "@/components/menu/Settings/Settings.vue";
 
 const views = {
   main: Main,
@@ -10,28 +10,40 @@ const views = {
   options: Options,
 };
 
+const volume = localStorage.getItem('sliderValue') ?
+    ref(parseInt(localStorage.getItem('sliderValue'), 10) / 100) : ref(1);
+
 const currentView = ref(null);
 
 const setView = (view) => {
   currentView.value = view;
 };
 
+const menuMusic = new Audio(new URL('@/assets/audio/blow_with_the_fires.ogg', import.meta.url));
+
+watch(volume, (newValue) => {
+  menuMusic.volume = newValue;
+});
+
 onMounted(() => {
   setView('main');
+  menuMusic.loop = true;
+  menuMusic.volume = volume.value;
+  menuMusic.play();
 });
+
+provide('volume', volume);
 </script>
 
 <template>
   <div>
-    <audio autoplay loop>
-      <source src="@/assets/audio/blow_with_the_fires.ogg" type="audio/ogg"/>
-    </audio>
 
     <transition name="fade">
       <component :is="views[currentView]"
                  @toExit="setView('exit')"
                  @dontExit="setView('main')"
                  @toOptions="setView('options')"
+                 @toMain="setView('main')"
       />
     </transition>
   </div>

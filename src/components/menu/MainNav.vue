@@ -1,6 +1,11 @@
 <script setup>
 
+import {inject} from "vue";
+
+const volume = inject('volume');
+
 const gateSound = new Audio(new URL('@/assets/audio/menu_gate.ogg', import.meta.url));
+gateSound.volume = volume.value;
 
 const playGateSound = () => {
   gateSound.play();
@@ -51,11 +56,10 @@ const handleExitEnter = () => {
 
 .start-area {
   position: absolute;
-  bottom: 20%;
-  left: 23%;
-  width: 330px;
-  height: 615px;
-  transform: skewY(-4deg);
+  bottom: 22%;
+  left: 23.5%;
+  width: 320px;
+  height: 580px;
   background-color: white;
 }
 
