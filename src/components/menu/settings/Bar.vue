@@ -29,19 +29,19 @@ defineEmits(['update']);
     <label>{{ title }}</label>
     <div class="slider-track" @input="$emit('update', sliderValue)">
       <div
-          class="slider-left"
           :style="{ width: sliderValue + '%' }"
+          class="slider-left"
       ></div>
       <div
-          class="slider-right"
           :style="{ width: 100 - sliderValue + '%', left: sliderValue + '%' }"
+          class="slider-right"
       ></div>
       <input
-          type="range"
           v-model="sliderValue"
-          min="0"
-          max="100"
           class="custom-slider"
+          max="100"
+          min="0"
+          type="range"
       />
     </div>
   </div>

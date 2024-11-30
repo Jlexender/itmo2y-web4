@@ -14,7 +14,7 @@ defineEmits(['dontExit'])
 
 <template>
   <div>
-    <img src="@/assets/img/exit.jpg" alt="Game exit" class="game-canvas" draggable="false"/>
+    <img alt="Game exit" class="game-canvas" draggable="false" src="@/assets/img/exit.jpg"/>
 
     <div class="text-block">
       {{ exit }}
@@ -22,7 +22,7 @@ defineEmits(['dontExit'])
 
     <div class="choice">
       <ul>
-        <li @click="handleYes" :style="{ visibility: showYes ? 'visible' : 'hidden' }">Да</li>
+        <li :style="{ visibility: showYes ? 'visible' : 'hidden' }" @click="handleYes">Да</li>
         <li @click="$emit('dontExit')">Нет</li>
       </ul>
     </div>

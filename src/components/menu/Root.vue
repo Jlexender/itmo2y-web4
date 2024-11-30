@@ -2,12 +2,16 @@
 import Main from "@/components/menu/Main.vue";
 import {inject, onMounted, onUnmounted, ref, watch} from "vue";
 import Exit from "@/components/menu/Exit.vue";
-import Options from "@/components/menu/Settings/Settings.vue";
+import Options from "@/components/menu/settings/Settings.vue";
+import Login from "@/components/menu/auth/Login.vue";
+import Register from "@/components/menu/auth/Register.vue";
 
 const views = {
   main: Main,
   exit: Exit,
   options: Options,
+  login: Login,
+  register: Register
 };
 
 const currentView = ref(null);
@@ -48,10 +52,12 @@ defineEmits(['toStart']);
 
     <transition name="fade">
       <component :is="views[currentView]"
-                 @toExit="setView('exit')"
                  @dontExit="setView('main')"
-                 @toOptions="setView('options')"
+                 @toExit="setView('exit')"
+                 @toLogin="setView('login')"
                  @toMain="setView('main')"
+                 @toOptions="setView('options')"
+                 @toRegister="setView('register')"
                  @toStart="$emit('toStart')"
       />
     </transition>

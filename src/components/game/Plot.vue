@@ -11,7 +11,7 @@ watch(cRadius, drawCanvas);
 function drawDot(ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.beginPath();
-  ctx.arc(x, y, 5, 0, Math.PI * 2);
+  ctx.arc(x, y, 7, 0, Math.PI * 2);
   ctx.fill();
 }
 
@@ -74,7 +74,7 @@ function drawTriangle(ctx, x1, y1, x2, y2, x3, y3, color) {
 function drawCanvas() {
   const canvas = canvasRef.value;
   const ctx = canvas.getContext('2d');
-  const drawColor = 'rgba(67,109,189,0.7)';
+  const drawColor = 'rgba(255,255,255,0.3)';
   const centerX = canvas.width / 2;
   const centerY = canvas.height / 2;
 
@@ -97,7 +97,7 @@ const handleClick = (event) => {
   const x = (event.clientX - rect.left) * canvas.width / rect.width;
   const y = (event.clientY - rect.top) * canvas.height / rect.height;
 
-  drawDot(ctx, x, y, 'white');
+  drawDot(ctx, x, y, 'lime');
   const result = checkIfInArea(x, y);
   if (result) {
     emit('makeHappy');

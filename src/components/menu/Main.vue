@@ -4,21 +4,23 @@ import {ref} from "vue";
 
 const showGate = ref(false);
 
-defineEmits(['toExit', 'toOptions', 'toStart']);
+defineEmits(['toExit', 'toOptions', 'toStart', 'toLogin', 'toRegister']);
 </script>
 
 <template>
   <div class="container">
-    <img src="@/assets/img/mainmenu_ground.jpg" alt="Main menu" class="game-canvas" draggable="false"/>
-    <transition name="fade" appear>
-      <img v-if="showGate" src="@/assets/img/mainmenu_hover.jpg" alt="Main menu" class="game-canvas" draggable="false"/>
+    <img alt="Main menu" class="game-canvas" draggable="false" src="@/assets/img/mainmenu_ground.jpg"/>
+    <transition appear name="fade">
+      <img v-if="showGate" alt="Main menu" class="game-canvas" draggable="false" src="@/assets/img/mainmenu_hover.jpg"/>
     </transition>
 
 
-    <MainNav @toExit="$emit('toExit')"
-             @toOptions="$emit('toOptions')"
+    <MainNav @closeGates="showGate = false"
              @openGates="showGate = true"
-             @closeGates="showGate = false"
+             @toLogin="$emit('toLogin')"
+             @toRegister="$emit('toRegister')"
+             @toExit="$emit('toExit')"
+             @toOptions="$emit('toOptions')"
              @toStart="$emit('toStart')"
     />
   </div>

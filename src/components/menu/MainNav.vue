@@ -11,7 +11,7 @@ const playGateSound = () => {
   gateSound.play();
 };
 
-const emit = defineEmits(['toExit', 'toOptions', 'toStart', 'openGates', 'closeGates']);
+const emit = defineEmits(['toExit', 'toOptions', 'toStart', 'toLogin', 'openGates', 'closeGates']);
 
 const handleExitEnter = () => {
   playGateSound();
@@ -23,9 +23,9 @@ const handleExitEnter = () => {
 <template>
   <div
       class="transparent exit-area"
+      @click="$emit('toExit')"
       @mouseenter="handleExitEnter"
-      @mouseleave="$emit('closeGates')"
-      @click="$emit('toExit')">
+      @mouseleave="$emit('closeGates')">
     Exit
   </div>
 
@@ -35,6 +35,10 @@ const handleExitEnter = () => {
 
   <div class="transparent options-area" @click="$emit('toOptions')">
     Options
+  </div>
+
+  <div class="transparent authorize-area" @click="$emit('toLogin')">
+    Authorization
   </div>
 
 </template>
@@ -73,7 +77,17 @@ const handleExitEnter = () => {
   background-color: white;
 }
 
-.start-area:hover {
+.authorize-area {
+  position: absolute;
+  bottom: 25%;
+  left: 41.5%;
+  width: 270px;
+  height: 550px;
+  transform: skewY(-8deg);
+  background-color: white;
+}
+
+.start-area:hover, .authorize-area:hover {
   opacity: 0.2;
   background-color: #ffffff;
 }

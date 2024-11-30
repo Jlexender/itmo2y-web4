@@ -1,5 +1,5 @@
 <script setup>
-import Bar from "@/components/menu/Settings/Bar.vue";
+import Bar from "@/components/menu/settings/Bar.vue";
 import {inject} from "vue";
 
 const volume = inject('volume');
@@ -13,8 +13,8 @@ defineEmits(['toMain']);
 
 <template>
   <div>
-    <img src="@/assets/img/history_bg.jpg" alt="Options" class="game-canvas" draggable="false"/>
-    <img src="@/assets/img/preferences_bg.jpg" alt="Options 2" class="game-canvas" draggable="false"/>
+    <img alt="Options" class="game-canvas" draggable="false" src="@/assets/img/history_bg.jpg"/>
+    <img alt="Options 2" class="game-canvas" draggable="false" src="@/assets/img/preferences_bg.jpg"/>
 
     <header>
       <span class="star">☆</span> Настройки <span class="star">☆</span>
