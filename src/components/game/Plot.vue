@@ -2,6 +2,7 @@
 import {inject, ref, watch} from 'vue';
 
 const canvasRef = ref(null);
+const volume = inject('volume');
 const cRadius = inject('cRadius');
 
 const emit = defineEmits(['makeSad', 'makeHappy']);
@@ -86,6 +87,9 @@ function drawCanvas() {
 }
 
 const handleClick = (event) => {
+  const sound = new Audio(new URL('@/assets/audio/tennis_serve_1.ogg', import.meta.url));
+  sound.volume = volume.value;
+  sound.play();
   const canvas = canvasRef.value;
   const ctx = canvas.getContext('2d');
   const rect = canvas.getBoundingClientRect();
@@ -110,11 +114,11 @@ const checkIfInArea = (x, y) => {
   if (x > centerX && y < centerY) {
     return false;
   } else if (x > centerX && y > centerY) {
-    return (x - centerX) ** 2 + (y - centerY) ** 2 <= radius**2;
+    return (x - centerX) ** 2 + (y - centerY) ** 2 <= radius ** 2;
   } else if (x < centerX && y > centerY) {
     return -0.5 * (x - centerX) - radius <= centerY - y;
   } else {
-    return 2*x >= centerX - radius && 2*y >= centerY - radius;
+    return 2 * x >= centerX - radius && 2 * y >= centerY - radius;
   }
 };
 </script>

@@ -19,12 +19,16 @@ provide('cRadius', cRadius);
 
 const volume = inject('volume');
 const bgMusic = new Audio(new URL('@/assets/audio/lets_be_friends.ogg', import.meta.url));
+const ambient = new Audio(new URL('@/assets/audio/boat_station_night.ogg', import.meta.url));
 
 onMounted(() => {
   setTimeout(() => {
     bgMusic.volume = volume.value;
     bgMusic.loop = true;
     bgMusic.play();
+    ambient.volume = volume.value;
+    ambient.loop = true;
+    ambient.play();
   }, 1000);
 });
 
@@ -32,8 +36,10 @@ onUnmounted(() => {
   setInterval(() => {
     if (bgMusic.volume > 0.01) {
       bgMusic.volume -= 0.01;
+      ambient.volume -= 0.01;
     } else {
       bgMusic.pause();
+      ambient.pause();
     }
   }, 30);
 });
