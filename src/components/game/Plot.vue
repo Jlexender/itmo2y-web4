@@ -118,7 +118,7 @@ const checkIfInArea = (x, y) => {
   } else if (x < centerX && y > centerY) {
     return -0.5 * (x - centerX) - radius <= centerY - y;
   } else {
-    return 2 * x >= centerX - radius && 2 * y >= centerY - radius;
+    return (centerX - x) <= 2 * radius && (centerY - y) <= 2*radius;
   }
 };
 </script>
