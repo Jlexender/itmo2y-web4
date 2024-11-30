@@ -1,6 +1,6 @@
 <script setup>
 import Main from "@/components/menu/Main.vue";
-import {onMounted, onUnmounted, provide, ref, watch} from "vue";
+import {inject, onMounted, onUnmounted, provide, ref, watch} from "vue";
 import Exit from "@/components/menu/Exit.vue";
 import Options from "@/components/menu/Settings/Settings.vue";
 
@@ -10,20 +10,17 @@ const views = {
   options: Options,
 };
 
-const volume = localStorage.getItem('sliderValue') ?
-    ref(parseInt(localStorage.getItem('sliderValue'), 10) / 100) : ref(1);
-
 const currentView = ref(null);
-
 const setView = (view) => {
   currentView.value = view;
 };
 
+const volume = inject('volume');
 const menuMusic = new Audio(new URL('@/assets/audio/blow_with_the_fires.ogg', import.meta.url));
-
 watch(volume, (newValue) => {
   menuMusic.volume = newValue;
 });
+
 
 onMounted(() => {
   setView('main');
@@ -42,8 +39,6 @@ onUnmounted(() => {
   }, 30);
 });
 defineEmits(['toStart']);
-
-provide('volume', volume);
 </script>
 
 <template>

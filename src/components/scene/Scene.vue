@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted, inject} from "vue";
+import {ref, onMounted, inject, watch, provide} from "vue";
 import Disclaimer from "@/components/intro/Disclaimer.vue";
 import Splash from "@/components/intro/Splash.vue";
 import Menu from "@/components/menu/Root.vue";
@@ -8,19 +8,26 @@ import Game from "@/components/game/Game.vue";
 
 const mode = ref('default');
 const name = ref('cross-fade');
-const views = [Disclaimer, Splash, Menu, Game];
+const views = {
+  'disclaimer': Disclaimer,
+  'splash': Splash,
+  'menu': Menu,
+  'game': Game,
+}
 const viewId = ref(0);
 
-const nextScene = () => {
-  if (viewId.value < views.length - 1) {
-    viewId.value++;
-  }
+const volume = localStorage.getItem('sliderValue') ?
+    ref(parseInt(localStorage.getItem('sliderValue'), 10) / 100) : ref(1);
+provide('volume', volume);
+
+const setScene = (name) => {
+  viewId.value = Object.keys(views).findIndex((key) => key === name);
 };
 
 const startGame = () => {
   mode.value = 'out-in';
   name.value = 'long-fade';
-  nextScene();
+  setScene('game');
 };
 
 const scaleScene = () => {
@@ -51,9 +58,9 @@ onMounted(() => {
   <Cursor />
   <div class="scene">
     <transition :name="name" :mode="mode">
-      <component :is="views[viewId]"
-                 @toSplash="nextScene"
-                 @toMain="nextScene"
+      <component :is="views[Object.keys(views)[viewId]]"
+                 @toSplash="setScene('splash')"
+                 @toMain="setScene('menu')"
                  @toStart="startGame"
       />
     </transition>
