@@ -7,9 +7,9 @@
 <style scoped>
 img {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 55%;
+  width: 65%;
 }
 </style>

@@ -11,6 +11,13 @@ const showLogo = () => {
 setTimeout(() => {
   showLogo();
 }, 4000);
+
+const emit = defineEmits(['toMain']);
+
+setTimeout(() => {
+  emit('toMain');
+}, 7000);
+
 </script>
 
 <template>
@@ -36,18 +43,10 @@ setTimeout(() => {
 img {
   width: 1920px;
   height: 2160px;
-  animation: moveUp 6s ease-out forwards;
+  animation: moveUp 4s linear forwards;
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-to, .fade-leave-from {
-  opacity: 1;
+  transition: opacity 2s;
 }
 </style>

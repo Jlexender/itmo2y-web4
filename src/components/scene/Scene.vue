@@ -1,30 +1,47 @@
 <script setup>
-
-import {ref} from "vue";
+import { ref, onMounted } from "vue";
 import Disclaimer from "@/components/intro/Disclaimer.vue";
 import Splash from "@/components/intro/Splash.vue";
-import Menu from "@/components/menu/Menu.vue";
+import Menu from "@/components/menu/Root.vue";
 import Exit from "@/components/menu/Exit.vue";
 
-const views = [
-  Disclaimer,
-  Splash,
-  Menu,
-];
-
+const views = [Disclaimer, Splash, Menu];
 const viewId = ref(0);
 
 const handleClick = () => {
   if (viewId.value < views.length - 1) {
     viewId.value++;
   }
-}
+};
+
+const scaleScene = () => {
+  const scene = document.querySelector(".scene");
+  if (!scene) return;
+
+  const sceneWidth = 1920;
+  const sceneHeight = 1080;
+
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+
+  const scale = Math.min(windowWidth / sceneWidth, windowHeight / sceneHeight);
+
+  scene.style.transform = `scale(${scale})`;
+  scene.style.left = `${(windowWidth - sceneWidth * scale) / 2}px`;
+  scene.style.top = `${(windowHeight - sceneHeight * scale) / 2}px`;
+};
+
+onMounted(() => {
+  scaleScene();
+  window.addEventListener("resize", scaleScene);
+});
+
 </script>
 
 <template>
   <div class="scene">
     <transition name="cross-fade">
-      <component :is="views[viewId]" @click="handleClick"/>
+      <component :is="views[viewId]" @click="handleClick" @toMain="handleClick"/>
     </transition>
   </div>
 </template>
@@ -32,12 +49,10 @@ const handleClick = () => {
 <style scoped>
 .scene {
   position: fixed;
-  top: 30px;
-  left: 30px;
   width: 1920px;
   height: 1080px;
+  transform-origin: top left;
   overflow: hidden;
-  outline: 3px solid red;
 }
 
 .cross-fade-enter-active,
@@ -55,4 +70,3 @@ const handleClick = () => {
   opacity: 1;
 }
 </style>
-
