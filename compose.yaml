@@ -5,3 +5,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: gvenzl/oracle-free:latest
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_PASSWORD=oracle
+      - APP_USER=app
+      - APP_USER_PASSWORD=app

@@ -8,7 +8,7 @@ import (
 func main() {
 	r := gin.Default()
 	routes.Init(r)
-	err := r.Run()
+	err := r.Run(":8080")
 
 	if err != nil {
 		panic(err)
