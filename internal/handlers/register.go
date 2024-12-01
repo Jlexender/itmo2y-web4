@@ -30,7 +30,7 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	if !util.ValidateWeb(req.Name) || !util.ValidateWeb(req.Pass) {
+	if !util.ValidateCredential(req.Name) || !util.ValidateCredential(req.Pass) {
 		c.JSON(400, RegisterResponse{
 			Error:   true,
 			Message: "Invalid credentials",
