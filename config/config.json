@@ -1,0 +1,11 @@
+{
+  "database": {
+    "user": "alex",
+    "password": "0000",
+    "dbname": "postgres",
+    "sslmode": "disable"
+  },
+  "server": {
+      "port": 8080
+  }
+}

@@ -29,7 +29,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	if !util.ValidateCredential(req.Name) || !util.ValidateCredential(req.Pass) {
+	if !util.IsCredential(req.Name) || !util.IsCredential(req.Pass) {
 		c.JSON(400, RegisterResponse{
 			Error:   true,
 			Message: "Invalid credentials",

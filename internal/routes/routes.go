@@ -7,14 +7,16 @@ import (
 )
 
 func Init(r *gin.Engine) {
-	r.SetTrustedProxies([]string{"localhost"})
-
 	log.Printf("Starting routes initialization")
+
+	err := r.SetTrustedProxies([]string{"127.0.0.1"})
+	if err != nil {
+		panic(err)
+	}
 	base := r.Group("/api/auth")
 
 	base.POST("/register", handlers.Register)
 	base.POST("/login", handlers.Login)
 
 	r.GET("/api/user/:name", handlers.GetUser)
-
 }
