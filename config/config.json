@@ -8,6 +8,6 @@
     "sslmode": "disable"
   },
   "server": {
-      "port": 3080
+      "port": 8080
   }
 }

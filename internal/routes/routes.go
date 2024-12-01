@@ -15,11 +15,12 @@ func Init(r *gin.Engine) {
 		panic(err)
 	}
 
-	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"http://localhost:3000"},
-		AllowMethods: []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders: []string{"Origin"},
-	}))
+    r.Use(cors.New(cors.Config{
+        AllowOrigins:     []string{"*"},
+        AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+        AllowCredentials: false, 
+    }))
 
 	base := r.Group("/api/auth")
 	base.POST("/register", handlers.Register)

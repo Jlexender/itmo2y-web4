@@ -25,7 +25,7 @@ func Register(c *gin.Context) {
 	if err != nil {
 		c.JSON(400, RegisterResponse{
 			Error:   true,
-			Message: "Invalid request",
+			Message: "Неправильный формат запроса",
 		})
 		return
 	}
@@ -33,7 +33,7 @@ func Register(c *gin.Context) {
 	if !util.IsCredential(req.Name) || !util.IsCredential(req.Pass) {
 		c.JSON(400, RegisterResponse{
 			Error:   true,
-			Message: "Invalid credentials",
+			Message: "Данные введены неверно",
 		})
 		return
 	}
@@ -41,7 +41,7 @@ func Register(c *gin.Context) {
 	if services.UserExists(req.Name) {
 		c.JSON(400, RegisterResponse{
 			Error:   true,
-			Message: "User already exists",
+			Message: "Пользователь уже зарегистрирован",
 		})
 		return
 	}
@@ -56,6 +56,6 @@ func Register(c *gin.Context) {
 
 	c.JSON(200, RegisterResponse{
 		Error:   false,
-		Message: "User registered",
+		Message: "Успешная регистрация",
 	})
 }

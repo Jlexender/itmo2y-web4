@@ -24,7 +24,7 @@ func Login(c *gin.Context) {
 	if err != nil {
 		c.JSON(400, LoginResponse{
 			Error:   true,
-			Message: "Invalid request",
+			Message: "Неправильный формат запроса",
 		})
 		return
 	}
@@ -32,7 +32,7 @@ func Login(c *gin.Context) {
 	if !util.IsCredential(req.Name) || !util.IsCredential(req.Pass) {
 		c.JSON(400, RegisterResponse{
 			Error:   true,
-			Message: "Invalid credentials",
+			Message: "Данные указаны неверно",
 		})
 		return
 	}
@@ -43,13 +43,13 @@ func Login(c *gin.Context) {
 	if user.Hash != hash {
 		c.JSON(400, RegisterResponse{
 			Error:   true,
-			Message: "Invalid credentials",
+			Message: "Данные указаны неверно",
 		})
 		return
 	}
 
 	c.JSON(200, RegisterResponse{
 		Error:   false,
-		Message: "User logged in",
+		Message: "Успешный вход",
 	})
 }
