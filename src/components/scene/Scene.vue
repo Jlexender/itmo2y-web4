@@ -5,10 +5,12 @@ import Splash from "@/components/intro/Splash.vue";
 import Menu from "@/components/menu/Root.vue";
 import Cursor from "@/components/Cursor.vue";
 import Game from "@/components/game/Game.vue";
+import Author from "@/components/intro/Author.vue";
 
 const mode = ref('default');
 const name = ref('cross-fade');
 const views = {
+  'author': Author,
   'disclaimer': Disclaimer,
   'splash': Splash,
   'menu': Menu,
@@ -59,6 +61,7 @@ onMounted(() => {
   <div class="scene">
     <transition :name="name" :mode="mode">
       <component :is="views[Object.keys(views)[viewId]]"
+                 @toDisclaimer="setScene('disclaimer')"
                  @toSplash="setScene('splash')"
                  @toMain="setScene('menu')"
                  @toStart="startGame"
