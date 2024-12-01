@@ -7,10 +7,21 @@ services:
       - "3080:8080"
     depends_on:
       - db
+    networks:
+      - my-network
 
   db:
-    image: gvenzl/oracle-free:latest
-    ports:
-      - "1521:1521"
+    image: postgres:latest
     environment:
-      - ORACLE_PASSWORD=oracle
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+      POSTGRES_HOST: db
+    ports:
+      - "3032:5432"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

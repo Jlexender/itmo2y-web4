@@ -17,6 +17,7 @@ RUN apk add --no-cache ca-certificates
 WORKDIR /root/
 
 COPY --from=builder /app/app .
+COPY --from=builder /app/config ./config
 
 ENTRYPOINT ["./app"]
 

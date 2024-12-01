@@ -8,7 +8,7 @@ import (
 )
 
 type RegisterRequest struct {
-	Name string `json:"user"`
+	Name string `json:"name"`
 	Pass string `json:"pass"`
 }
 

@@ -1,8 +1,10 @@
 {
   "database": {
-    "user": "alex",
-    "password": "0000",
-    "dbname": "postgres",
+    "user": "user",
+    "password": "password",
+    "dbname": "db",
+    "host": "db",
+    "port": 5432,
     "sslmode": "disable"
   },
   "server": {
