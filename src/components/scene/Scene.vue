@@ -5,14 +5,14 @@ import Splash from "@/components/intro/Splash.vue";
 import Menu from "@/components/menu/Root.vue";
 import Cursor from "@/components/Cursor.vue";
 import Game from "@/components/game/Game.vue";
-import Author from "@/components/intro/Author.vue";
+import Unauthorized from "@/components/menu/Unauthorized.vue";
 
 const mode = ref('default');
 const name = ref('cross-fade');
 const views = {
-  'author': Author,
-  'disclaimer': Disclaimer,
-  'splash': Splash,
+  // 'author': Author,
+  // 'disclaimer': Disclaimer,
+  // 'splash': Splash,
   'menu': Menu,
   'game': Game,
 }
@@ -26,11 +26,22 @@ const setScene = (name) => {
   viewId.value = Object.keys(views).findIndex((key) => key === name);
 };
 
+const hasAuthenticated = ref(false); provide('auth', hasAuthenticated);
+const showWarn = ref(false);
+const handleStart = () => {
+  if (hasAuthenticated.value === true) {
+    startGame();
+  } else {
+    showWarn.value = true;
+  }
+}
+
 const startGame = () => {
   mode.value = 'out-in';
   name.value = 'long-fade';
   setScene('game');
 };
+
 
 const scaleScene = () => {
   const scene = document.querySelector(".scene");
@@ -53,7 +64,6 @@ onMounted(() => {
   scaleScene();
   window.addEventListener("resize", scaleScene);
 });
-
 </script>
 
 <template>
@@ -64,8 +74,12 @@ onMounted(() => {
                  @toDisclaimer="setScene('disclaimer')"
                  @toSplash="setScene('splash')"
                  @toMain="setScene('menu')"
-                 @toStart="startGame"
+                 @toStart="handleStart"
       />
+    </transition>
+
+    <transition name="short-fade">
+      <Unauthorized v-if="showWarn" @click="showWarn=false"/>
     </transition>
   </div>
 </template>
@@ -106,6 +120,21 @@ onMounted(() => {
 
 .long-fade-enter-to,
 .long-fade-leave-from {
+  opacity: 1;
+}
+
+.short-fade-enter-active,
+.short-fade-leave-active {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.short-fade-enter-from,
+.short-fade-leave-to {
+  opacity: 0;
+}
+
+.short-fade-enter-to,
+.short-fade-leave-from {
   opacity: 1;
 }
 </style>

@@ -1,9 +1,36 @@
 <script setup>
-import {inject} from "vue";
-
-const volume = inject('volume');
+import {inject, ref} from "vue";
 
 defineEmits(['toMain', 'toOptions', 'toRegister']);
+
+const hasAuthenticated = inject('auth');
+
+const loginInput = ref('');
+const passwordInput = ref('');
+
+
+const login = async () => {
+  try {
+    await fetch('http://localhost:3080/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: loginInput.value,
+        pass: passwordInput.value
+      })
+    }).then(response => {
+      if (response.ok) {
+        console.log("Успешная авторизация!")
+        hasAuthenticated.value = true;
+      } else {}
+    });
+  } catch (e) {
+    console.log(e);
+  }
+
+}
 </script>
 
 <template>
@@ -27,10 +54,10 @@ defineEmits(['toMain', 'toOptions', 'toRegister']);
 
     <form autocomplete="off">
       <label for="login">Логин</label>
-      <input type="text" id="login" name="login" required> <br>
+      <input type="text" id="login" name="login" v-model="loginInput" required> <br>
       <label for="password">Пароль</label>
-      <input type="password" id="password" name="password" required> <br>
-      <button @click.prevent>Войти</button>
+      <input type="password" id="password" name="password" v-model="passwordInput" required> <br>
+      <button @click.prevent="login">Войти</button>
     </form>
 
 
