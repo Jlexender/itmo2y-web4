@@ -4,10 +4,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"web4/internal/models"
 	"web4/internal/services"
+	"web4/internal/util"
 )
 
 type RegisterRequest struct {
-	User string `json:"user"`
+	Name string `json:"user"`
 	Pass string `json:"pass"`
 }
 
@@ -29,15 +30,15 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	if req.User == "" || req.Pass == "" {
+	if !util.ValidateWeb(req.Name) || !util.ValidateWeb(req.Pass) {
 		c.JSON(400, RegisterResponse{
 			Error:   true,
-			Message: "Invalid request",
+			Message: "Invalid credentials",
 		})
 		return
 	}
 
-	if services.UserExists(req.User) {
+	if services.UserExists(req.Name) {
 		c.JSON(400, RegisterResponse{
 			Error:   true,
 			Message: "User already exists",
@@ -47,7 +48,7 @@ func Register(c *gin.Context) {
 
 	hash := services.Sha256(req.Pass)
 	user := models.User{
-		User: req.User,
+		Name: req.Name,
 		Hash: hash,
 	}
 

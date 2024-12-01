@@ -3,10 +3,11 @@ package handlers
 import (
 	"github.com/gin-gonic/gin"
 	"web4/internal/services"
+	"web4/internal/util"
 )
 
 type LoginRequest struct {
-	User string `json:"user"`
+	Name string `json:"user"`
 	Pass string `json:"pass"`
 }
 
@@ -28,16 +29,16 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	if req.User == "" || req.Pass == "" {
+	if !util.ValidateWeb(req.Name) || !util.ValidateWeb(req.Pass) {
 		c.JSON(400, RegisterResponse{
 			Error:   true,
-			Message: "Invalid request",
+			Message: "Invalid credentials",
 		})
 		return
 	}
 
 	hash := services.Sha256(req.Pass)
-	user := services.GetUser(req.User)
+	_, user := services.GetUser(req.Name)
 
 	if user.Hash != hash {
 		c.JSON(400, RegisterResponse{
