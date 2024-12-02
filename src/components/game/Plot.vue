@@ -107,6 +107,23 @@ const checkIfInsideFigure = (x, y, radius) => {
   }
 };
 
+const backendIfInsideFigure = async (x, y, radius) => {
+  try {
+    const response = await fetch('http://localhost:3080/api/check', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ x, y, radius }),
+    });
+    const data = await response.json();
+    return data.result;
+  } catch (error) {
+    console.error('Error:', error);
+    return false;
+  }
+};
+
 const handleClick = (event) => {
   const canvas = canvasRef.value;
   const ctx = canvas.getContext('2d');
