@@ -15,16 +15,17 @@ func Init(r *gin.Engine) {
 		panic(err)
 	}
 
-    r.Use(cors.New(cors.Config{
-        AllowOrigins:     []string{"*"},
-        AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-        AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
-        AllowCredentials: false, 
-    }))
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		AllowCredentials: false,
+	}))
 
 	base := r.Group("/api/auth")
 	base.POST("/register", handlers.Register)
 	base.POST("/login", handlers.Login)
 
 	r.GET("/api/user/:name", handlers.GetUser)
+	r.POST("/api/check", handlers.CheckIfInArea)
 }
