@@ -90,9 +90,4 @@ ul li {
   font-family: Roboto, sans-serif;
   color: #a35434;
 }
-
-.slider {
-  margin-left: 20px;
-  width: 500px;
-}
 </style>

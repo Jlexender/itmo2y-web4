@@ -11,9 +11,9 @@ import Author from "@/components/intro/Author.vue";
 const mode = ref('default');
 const name = ref('cross-fade');
 const views = {
-  // 'author': Author,
-  // 'disclaimer': Disclaimer,
-  // 'splash': Splash,
+  'author': Author,
+  'disclaimer': Disclaimer,
+  'splash': Splash,
   'menu': Menu,
   'game': Game,
 }
@@ -27,7 +27,7 @@ const setScene = (name) => {
   viewId.value = Object.keys(views).findIndex((key) => key === name);
 };
 
-const hasAuthenticated = ref(true); provide('auth', hasAuthenticated); // TODO: change to false
+const hasAuthenticated = ref(false); provide('auth', hasAuthenticated);
 const showWarn = ref(false);
 const handleStart = () => {
   if (hasAuthenticated.value === true) {

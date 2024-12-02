@@ -1,5 +1,5 @@
 <script setup>
-import {inject, ref} from "vue";
+import {h, inject, ref} from "vue";
 
 defineEmits(['toMain', 'toOptions', 'toRegister']);
 
@@ -38,6 +38,10 @@ const login = async () => {
     console.log(e);
   }
 }
+
+const handleLogout = () => {
+  hasAuthenticated.value = false;
+}
 </script>
 
 <template>
@@ -64,10 +68,12 @@ const login = async () => {
       <input type="text" id="login" name="login" v-model="loginInput" required> <br>
       <label for="password">Пароль</label>
       <input type="password" id="password" name="password" v-model="passwordInput" required> <br>
-      <button @click.prevent="login">Войти</button><br/>
+      <div class="button-list">
+        <button @click.prevent="login">Войти</button><br/>
+        <button v-if="hasAuthenticated" @click.prevent="handleLogout">Выход</button>
+      </div>
       <div v-text="message" style="text-align: center"/>
     </form>
-
 
     <div class="go-back" @click="$emit('toMain')">
       ← Назад
@@ -76,6 +82,13 @@ const login = async () => {
 </template>
 
 <style scoped>
+.button-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
 header {
   position: absolute;
   font-size: 58px;

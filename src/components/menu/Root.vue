@@ -5,13 +5,15 @@ import Exit from "@/components/menu/Exit.vue";
 import Options from "@/components/menu/settings/Settings.vue";
 import Login from "@/components/menu/auth/Login.vue";
 import Register from "@/components/menu/auth/Register.vue";
+import Table from "@/components/menu/table/DataTable.vue";
 
 const views = {
   main: Main,
   exit: Exit,
   options: Options,
   login: Login,
-  register: Register
+  register: Register,
+  table: Table
 };
 
 const currentView = ref(null);
@@ -57,6 +59,7 @@ defineEmits(['toStart']);
                  @toMain="setView('main')"
                  @toOptions="setView('options')"
                  @toRegister="setView('register')"
+                 @toTable="setView('table')"
                  @toStart="$emit('toStart')"
       />
     </transition>

@@ -11,7 +11,15 @@ const playGateSound = () => {
   gateSound.play();
 };
 
-const emit = defineEmits(['toExit', 'toOptions', 'toStart', 'toLogin', 'openGates', 'closeGates']);
+const emit = defineEmits([
+  'toExit',
+  'toOptions',
+  'toStart',
+  'toLogin',
+  'openGates',
+  'closeGates',
+  'toTable']
+);
 
 const handleExitEnter = () => {
   playGateSound();
@@ -39,6 +47,10 @@ const handleExitEnter = () => {
 
   <div class="transparent authorize-area" @click="$emit('toLogin')">
     Authorization
+  </div>
+
+  <div class="transparent table-area" @click="$emit('toTable')">
+    Table
   </div>
 
 </template>
@@ -87,7 +99,17 @@ const handleExitEnter = () => {
   background-color: white;
 }
 
-.start-area:hover, .authorize-area:hover {
+.table-area {
+  position: absolute;
+  bottom: 29%;
+  left: 56.5%;
+  width: 230px;
+  height: 505px;
+  transform: skewY(-8deg);
+  background-color: white;
+}
+
+.start-area:hover, .authorize-area:hover, .table-area:hover {
   opacity: 0.2;
   background-color: #ffffff;
 }

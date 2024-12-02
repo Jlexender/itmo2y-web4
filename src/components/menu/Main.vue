@@ -4,7 +4,7 @@ import {ref} from "vue";
 
 const showGate = ref(false);
 
-defineEmits(['toExit', 'toOptions', 'toStart', 'toLogin']);
+defineEmits(['toExit', 'toOptions', 'toStart', 'toLogin', 'toTable']);
 </script>
 
 <template>
@@ -21,6 +21,7 @@ defineEmits(['toExit', 'toOptions', 'toStart', 'toLogin']);
              @toExit="$emit('toExit')"
              @toOptions="$emit('toOptions')"
              @toStart="$emit('toStart')"
+             @toTable="$emit('toTable')"
     />
   </div>
 </template>
