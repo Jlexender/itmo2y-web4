@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"web4/internal/models"
 	"web4/internal/services"
 	"web4/internal/util"
@@ -23,7 +24,7 @@ func Register(c *gin.Context) {
 	err := c.BindJSON(&req)
 
 	if err != nil {
-		c.JSON(400, RegisterResponse{
+		c.JSON(http.StatusBadRequest, RegisterResponse{
 			Error:   true,
 			Message: "Неправильный формат запроса",
 		})
@@ -31,7 +32,7 @@ func Register(c *gin.Context) {
 	}
 
 	if !util.IsCredential(req.Name) || !util.IsCredential(req.Pass) {
-		c.JSON(400, RegisterResponse{
+		c.JSON(http.StatusBadRequest, RegisterResponse{
 			Error:   true,
 			Message: "Данные введены неверно",
 		})
@@ -39,7 +40,7 @@ func Register(c *gin.Context) {
 	}
 
 	if services.UserExists(req.Name) {
-		c.JSON(400, RegisterResponse{
+		c.JSON(http.StatusBadRequest, RegisterResponse{
 			Error:   true,
 			Message: "Пользователь уже зарегистрирован",
 		})
@@ -54,8 +55,18 @@ func Register(c *gin.Context) {
 
 	services.AddUser(user)
 
-	c.JSON(200, RegisterResponse{
+	token, err := util.GenerateJWT(user.Name)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, RegisterResponse{
+			Error:   true,
+			Message: "Ошибка при генерации токена",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, RegisterResponse{
 		Error:   false,
 		Message: "Успешная регистрация",
+		Token:   token,
 	})
 }

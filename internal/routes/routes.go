@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"web4/internal/handlers"
+	"web4/internal/routes/middleware"
 )
 
 func Init(r *gin.Engine) {
@@ -27,5 +28,6 @@ func Init(r *gin.Engine) {
 	base.POST("/login", handlers.Login)
 
 	r.GET("/api/user/:name", handlers.GetUser)
-	r.POST("/api/check", handlers.CheckIfInArea)
+	r.POST("/api/check", middleware.AuthRequired(), handlers.CheckIfInArea)
+	r.GET("/api/checks", middleware.AuthRequired(), handlers.GetAreaChecks)
 }
