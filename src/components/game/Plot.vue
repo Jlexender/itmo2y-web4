@@ -5,6 +5,8 @@ const radius = inject('cRadius');
 const limit = 5;
 watch(radius, () => draw());
 
+const emit = defineEmits(['makeSad', 'makeHappy']);
+
 const canvasRef = ref(null);
 const userDots = ref([]);
 
@@ -110,14 +112,21 @@ const handleClick = (event) => {
   const ctx = canvas.getContext('2d');
   const x = event.offsetX;
   const y = event.offsetY;
-  const dot = { x, y };
-  userDots.value.push(dot);
+
   const isInside = checkIfInsideFigure(x, y, radius.value);
+  const dot = { x, y, isInside };
+  userDots.value.push(dot);
+
+  if (isInside) {
+    emit('makeHappy');
+  } else {
+    emit('makeSad');
+  }
 
   drawDot(ctx, x, y, isInside);
-  // drawPointCoords(ctx, x, y);
+  drawPointCoords(ctx, x, y);
 
-  drawCanvasCoords(ctx, x, y);
+  // drawCanvasCoords(ctx, x, y);
 };
 
 const drawCanvasCoords = (ctx, x, y) => {
@@ -136,11 +145,7 @@ const drawDot = (ctx, x, y, isInside) => {
 const drawUserDots = (ctx) => {
   ctx.fillStyle = 'white';
   userDots.value.forEach(dot => {
-    ctx.fillStyle = 'white';
-    ctx.beginPath();
-    ctx.arc(dot.x, dot.y, 8, 0, 2 * Math.PI);
-    ctx.fill();
-
+    drawDot(ctx, dot.x, dot.y, dot.isInside);
     drawPointCoords(ctx, dot.x, dot.y);
   });
 };
@@ -179,7 +184,7 @@ onMounted(() => {
 <style scoped>
 canvas {
   position: absolute;
-  right: 5%;
+  right: 10%;
   top: 5%;
   border-radius: 20%;
   transform: skewY(10deg);
