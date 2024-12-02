@@ -5,9 +5,11 @@ import (
 )
 
 type AreaRequest struct {
-	X      int `json:"x"`
-	Y      int `json:"y"`
-	Radius int `json:"radius"`
+	X              int `json:"x"`
+	Y              int `json:"y"`
+	Radius         int `json:"radius"`
+	UnitMultiplier int `json:"unit_multiplier"`
+	CanvasLimit    int `json:"canvas_limit"`
 }
 
 func CheckIfInArea(c *gin.Context) {
@@ -19,15 +21,16 @@ func CheckIfInArea(c *gin.Context) {
 
 	x := request.X
 	y := request.Y
-	unit := 100 * request.Radius
+	unit := request.UnitMultiplier * request.Radius
+	lim := request.CanvasLimit
 
-	if x > 400 && y < 400 {
+	if x > lim && y < lim {
 		c.JSON(200, gin.H{"result": false})
-	} else if x <= 400 && y >= 400 {
-		c.JSON(200, gin.H{"result": 2*(y-400) <= (x-400)+unit})
-	} else if x < 400 && y < 400 {
-		c.JSON(200, gin.H{"result": x > 400-unit && y > 400-unit})
+	} else if x <= lim && y >= lim {
+		c.JSON(200, gin.H{"result": 2*(y-lim) <= (x-lim)+unit})
+	} else if x < lim && y < lim {
+		c.JSON(200, gin.H{"result": x > lim-unit && y > lim-unit})
 	} else {
-		c.JSON(200, gin.H{"result": (400-x)*(400-x)+(400-y)*(400-y) <= unit*unit/4})
+		c.JSON(200, gin.H{"result": (lim-x)*(lim-x)+(lim-y)*(lim-y) <= unit*unit/4})
 	}
 }
