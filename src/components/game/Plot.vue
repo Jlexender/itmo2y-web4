@@ -1,139 +1,175 @@
 <script setup>
-import {inject, ref, watch} from 'vue';
+import {inject, onMounted, ref, watch} from "vue";
+
+const radius = inject('cRadius');
+const limit = 5;
+watch(radius, () => draw());
 
 const canvasRef = ref(null);
-const volume = inject('volume');
-const cRadius = inject('cRadius');
+const userDots = ref([]);
 
-const emit = defineEmits(['makeSad', 'makeHappy']);
-watch(cRadius, drawCanvas);
-
-const plotDots = [];
-
-function redrawDots() {
-  const canvas = canvasRef.value;
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawAxes(ctx);
-  plotDots.forEach(dot => drawDot(ctx, dot.x, dot.y, dot.color));
-}
-
-function drawDot(ctx, x, y, color) {
-  plotDots.push({x, y, color});
-  ctx.fillStyle = color;
+const drawPolyline = (ctx, polyline) => {
+  ctx.lineWidth = 3;
+  ctx.fillStyle = 'rgba(178,53,255,0.3)';
   ctx.beginPath();
-  ctx.arc(x, y, 7, 0, Math.PI * 2);
-  ctx.fill();
-}
-
-function drawRect(ctx, x, y, width, height, color) {
-  ctx.fillStyle = color;
-  ctx.fillRect(x, y, width, height);
-}
-
-function drawArc(ctx, x, y, radius, startAngle, endAngle, color) {
-  ctx.fillStyle = color;
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-  ctx.arc(x, y, radius, startAngle, endAngle);
-  ctx.closePath();
-  ctx.fill();
-}
-
-function drawAxes(ctx) {
-  const width = ctx.canvas.width;
-  const height = ctx.canvas.height;
-
-  drawLine(ctx, 0, height / 2, width, height / 2, 'white');
-  drawLine(ctx, width / 2, 0, width / 2, height, 'white');
-
-  for (let i = 0; i < width; i += 50) {
-    drawLine(ctx, i, height / 2 - 5, i, height / 2 + 5, 'white');
+  ctx.moveTo(polyline[0].x, polyline[0].y);
+  for (let i = 1; i < polyline.length; i++) {
+    ctx.lineTo(polyline[i].x, polyline[i].y);
   }
+  ctx.fill();
+};
 
-  for (let i = 0; i < height; i += 50) {
-    drawLine(ctx, width / 2 - 5, i, width / 2 + 5, i, 'white');
-  }
-
-  ctx.font = '20px Arial';
-  ctx.fillStyle = 'blue';
-
-  ctx.fillText('x', width - 20, height / 2 - 20);
-  ctx.fillText('y', width / 2 + 20, 20);
-  ctx.fillText('0', width / 2 + 20, height / 2 - 20);
-}
-
-function drawLine(ctx, x1, y1, x2, y2, color) {
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2;
+const drawArc = (ctx, x, y, radius, startAngle, endAngle) => {
+  ctx.fillStyle = 'rgba(178,53,255,0.3)';
   ctx.beginPath();
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);
+  ctx.arc(x, y, radius, startAngle, endAngle)
+  ctx.lineTo(x, y);
+  ctx.fill();
+};
+
+const drawAxis = (ctx) => {
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = 'white';
+
+  // Y-axis
+  ctx.beginPath();
+  ctx.moveTo(400, 0);
+  ctx.lineTo(400, 800);
   ctx.stroke();
-}
 
-function drawTriangle(ctx, x1, y1, x2, y2, x3, y3, color) {
-  ctx.fillStyle = color;
+  // X-axis
   ctx.beginPath();
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);
-  ctx.lineTo(x3, y3);
-  ctx.closePath();
-  ctx.fill();
-}
+  ctx.moveTo(0, 400);
+  ctx.lineTo(800, 400);
+  ctx.stroke();
+};
 
-function drawCanvas() {
-  const canvas = canvasRef.value;
-  const ctx = canvas.getContext('2d');
-  const drawColor = 'rgba(255,255,255,0.3)';
-  const centerX = canvas.width / 2;
-  const centerY = canvas.height / 2;
+const labelAxis = (ctx) => {
+  ctx.fillStyle = 'blue';
+  ctx.font = '20px Century Gothic';
+  ctx.fillText('Y', 400 + 10, 20);
+  ctx.fillText('X', 780, 400 - 10);
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // x-axis labels
+  for (let i = 1; i < limit; i++) {
+    ctx.fillText(i, 400 + i*100 - 10, 400 + 20);
+  }
 
-  drawAxes(ctx);
-  drawArc(ctx, centerX, centerY, 50 * cRadius.value, 0, Math.PI / 2, drawColor);
-  drawRect(ctx, centerX - 100 * cRadius.value, centerY - 100 * cRadius.value, 100 * cRadius.value, 100 * cRadius.value, drawColor);
-  drawTriangle(ctx, centerX, centerY, centerX - 100 * cRadius.value, centerY, centerX, centerY + 50 * cRadius.value, drawColor);
+  // negative x-axis labels
+  for (let i = 1; i < limit; i++) {
+    ctx.fillText(-i, 400 - i*100 - 10, 400 + 20);
+  }
 
-  redrawDots();
-}
+  // y-axis labels
+  for (let i = 1; i < limit; i++) {
+    ctx.fillText(i, 400 - 20, 400 - i*100 + 10);
+  }
+
+  // negative y-axis labels
+  for (let i = 1; i < limit; i++) {
+    ctx.fillText(-i, 400 - 20, 400 + i*100 + 10);
+  }
+};
+
+const drawFigure = (ctx, radius) => {
+  const x = 400;
+  const y = 400;
+
+  const unit = 100*radius;
+
+  const polyline = [
+    { x: x - unit, y: y - unit },
+    { x: x - unit, y: y },
+    { x: x, y: y + unit/2 },
+    { x: x, y: y - unit },
+  ];
+
+  drawPolyline(ctx, polyline);
+
+  const startAngle = 0;
+  const endAngle = Math.PI/2;
+  drawArc(ctx, x, y, unit/2, startAngle, endAngle);
+};
+
+const checkIfInsideFigure = (x, y, radius) => {
+  const unit = 100*radius;
+
+  if (x > 400 && y < 400) {
+    return false;
+  } else if (x <= 400 && y >= 400) {
+    return 2*(y - 400) <= (x - 400) + unit;
+  } else if (x < 400 && y < 400) {
+    return x > 400 - unit && y > 400 - unit;
+  } else {
+    return (400 - x)**2 + (400 - y)**2 < (unit/2)**2;
+  }
+};
 
 const handleClick = (event) => {
-  const sound = new Audio(new URL('@/assets/audio/tennis_serve_1.ogg', import.meta.url));
-  sound.volume = volume.value;
-  sound.play();
   const canvas = canvasRef.value;
   const ctx = canvas.getContext('2d');
-  const rect = canvas.getBoundingClientRect();
+  const x = event.offsetX;
+  const y = event.offsetY;
+  const dot = { x, y };
+  userDots.value.push(dot);
+  const isInside = checkIfInsideFigure(x, y, radius.value);
 
-  const x = (event.clientX - rect.left) * canvas.width / rect.width;
-  const y = (event.clientY - rect.top) * canvas.height / rect.height;
+  drawDot(ctx, x, y, isInside);
+  // drawPointCoords(ctx, x, y);
 
-  drawDot(ctx, x, y, 'lime');
-  const result = checkIfInArea(x, y);
-  if (result) {
-    emit('makeHappy');
-  } else {
-    emit('makeSad');
-  }
+  drawCanvasCoords(ctx, x, y);
 };
 
-const checkIfInArea = (x, y) => {
-  const centerX = canvasRef.value.width / 2;
-  const centerY = canvasRef.value.height / 2;
-  const radius = cRadius.value * 50;
-
-  if (x > centerX && y < centerY) {
-    return false;
-  } else if (x > centerX && y > centerY) {
-    return (x - centerX) ** 2 + (y - centerY) ** 2 <= radius ** 2;
-  } else if (x < centerX && y > centerY) {
-    return -0.5 * (x - centerX) - radius <= centerY - y;
-  } else {
-    return (centerX - x) <= 2 * radius && (centerY - y) <= 2*radius;
-  }
+const drawCanvasCoords = (ctx, x, y) => {
+  ctx.fillStyle = 'blue';
+  ctx.font = '16px Century Gothic';
+  ctx.fillText(`(${x}, ${y})`, x + 10, y - 10);
 };
+
+const drawDot = (ctx, x, y, isInside) => {
+  ctx.fillStyle = isInside ? 'green' : 'red';
+  ctx.beginPath();
+  ctx.arc(x, y, 8, 0, 2 * Math.PI);
+  ctx.fill();
+};
+
+const drawUserDots = (ctx) => {
+  ctx.fillStyle = 'white';
+  userDots.value.forEach(dot => {
+    ctx.fillStyle = 'white';
+    ctx.beginPath();
+    ctx.arc(dot.x, dot.y, 8, 0, 2 * Math.PI);
+    ctx.fill();
+
+    drawPointCoords(ctx, dot.x, dot.y);
+  });
+};
+
+const drawPointCoords = (ctx, x, y) => {
+  ctx.fillStyle = 'blue';
+  ctx.font = '16px Century Gothic';
+
+  const unit = 100;
+  const realX = (x - 400) / unit;
+  const realY = (400 - y) / unit;
+
+  ctx.fillText(`(${realX}, ${realY})`, x + 10, y - 10);
+};
+
+const draw = () => {
+  const canvas = canvasRef.value;
+  const ctx = canvas.getContext('2d');
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawAxis(ctx);
+  labelAxis(ctx);
+  drawFigure(ctx, radius.value);
+  drawUserDots(ctx);
+};
+
+onMounted(() => {
+  draw();
+});
 </script>
 
 <template>

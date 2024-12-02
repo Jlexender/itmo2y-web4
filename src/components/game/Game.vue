@@ -89,7 +89,7 @@ const makeHappy = () => {
 }
 
 .to-menu:hover {
-  text-shadow: 0 0 20px white;
+  color: blue;
   transition: 0.5s;
 }
 
