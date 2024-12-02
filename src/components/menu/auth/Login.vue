@@ -8,6 +8,7 @@ const hasAuthenticated = inject('auth');
 const loginInput = ref('');
 const passwordInput = ref('');
 
+const message = ref('');
 
 const login = async () => {
   try {
@@ -20,16 +21,22 @@ const login = async () => {
         name: loginInput.value,
         pass: passwordInput.value
       })
-    }).then(response => {
+    }).then(async response => {
       if (response.ok) {
-        console.log("Успешная авторизация!")
-        hasAuthenticated.value = true;
-      } else {}
+        const data = await response.json();
+        message.value = data.message;
+        setTimeout(() => {
+          message.value = '';
+        }, 2000);
+
+        if (data.error === false) {
+          hasAuthenticated.value = true;
+        }
+      }
     });
   } catch (e) {
     console.log(e);
   }
-
 }
 </script>
 
@@ -57,7 +64,8 @@ const login = async () => {
       <input type="text" id="login" name="login" v-model="loginInput" required> <br>
       <label for="password">Пароль</label>
       <input type="password" id="password" name="password" v-model="passwordInput" required> <br>
-      <button @click.prevent="login">Войти</button>
+      <button @click.prevent="login">Войти</button><br/>
+      <div v-text="message" style="text-align: center"/>
     </form>
 
 

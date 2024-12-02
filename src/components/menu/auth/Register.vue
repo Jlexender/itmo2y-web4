@@ -1,5 +1,51 @@
 <script setup>
+import {inject, ref} from "vue";
+
 defineEmits(['toMain', 'toOptions', 'toLogin']);
+
+const hasAuthenticated = inject('auth');
+
+const loginInput = ref('');
+const passwordInput = ref('');
+const passwordRepeatInput = ref('');
+
+const message = ref('');
+
+const register = async () => {
+  if (passwordInput.value !== passwordRepeatInput.value) {
+    message.value = 'Пароли не совпадают';
+    setTimeout(() => {
+      message.value = '';
+    }, 2000);
+    return;
+  }
+  try {
+    await fetch('http://localhost:3080/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: loginInput.value,
+        pass: passwordInput.value
+      })
+    }).then(async response => {
+      if (response.ok) {
+        const data = await response.json();
+        message.value = data.message;
+        setTimeout(() => {
+          message.value = '';
+        }, 2000);
+
+        if (data.error === false) {
+          hasAuthenticated.value = true;
+        }
+      }
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
 </script>
 
 <template>
@@ -12,12 +58,13 @@ defineEmits(['toMain', 'toOptions', 'toLogin']);
 
     <form autocomplete="off">
       <label for="login">Логин</label>
-      <input type="text" id="login" name="login" required> <br>
+      <input type="text" id="login" name="login" v-model="loginInput" required> <br>
       <label for="password">Пароль</label>
-      <input type="password" id="password" name="password" required> <br>
+      <input type="password" id="password" name="password" v-model="passwordInput" required> <br>
       <label for="password-repeat">Повторите пароль</label>
-      <input type="password" id="password-repeat" name="password-repeat" required> <br>
-      <button @click.prevent>Зарегистрироваться</button>
+      <input type="password" id="password-repeat" name="password-repeat" v-model="passwordRepeatInput" required> <br>
+      <button @click.prevent="register">Зарегистрироваться</button><br/>
+      <div v-text="message" class="msg" style="text-align: center"/>
     </form>
 
     <nav>
@@ -39,6 +86,7 @@ defineEmits(['toMain', 'toOptions', 'toLogin']);
 </template>
 
 <style scoped>
+
 header {
   position: absolute;
   font-size: 58px;
