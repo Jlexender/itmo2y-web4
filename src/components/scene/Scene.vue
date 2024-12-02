@@ -6,13 +6,14 @@ import Menu from "@/components/menu/Root.vue";
 import Cursor from "@/components/Cursor.vue";
 import Game from "@/components/game/Game.vue";
 import Unauthorized from "@/components/menu/Unauthorized.vue";
+import Author from "@/components/intro/Author.vue";
 
 const mode = ref('default');
 const name = ref('cross-fade');
 const views = {
-  // 'author': Author,
-  // 'disclaimer': Disclaimer,
-  // 'splash': Splash,
+  'author': Author,
+  'disclaimer': Disclaimer,
+  'splash': Splash,
   'menu': Menu,
   'game': Game,
 }
