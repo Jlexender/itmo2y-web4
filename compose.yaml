@@ -6,7 +6,8 @@ services:
     ports:
       - "3080:8080"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - my-network
 
@@ -21,6 +22,12 @@ services:
       - "3032:5432"
     networks:
       - my-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "user", "-d", "db", "-h", "db"]
+      interval: 10s
+      timeout: 5s
+    volumes:
+      - db-data:/var/lib/postgresql/data
 
 networks:
   my-network:
