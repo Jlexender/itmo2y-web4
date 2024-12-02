@@ -1,5 +1,23 @@
 <script setup>
-import {computed, ref} from 'vue';
+import { computed, inject, onMounted, ref } from 'vue';
+
+const initializeTable = async (jwt) => {
+  try {
+    const response = await fetch('http://localhost:3080/api/checks', {
+      method: 'GET',
+      headers: {
+        'Authorization': `${jwt.value}`
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      items.value = data.sort((a, b) => new Date(b.send_time) - new Date(a.send_time));
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    items.value = [];
+  }
+};
 
 const itemsPerPage = 8;
 const currentPage = ref(1);
@@ -18,12 +36,20 @@ const goToPage = (page) => {
     currentPage.value = page;
   }
 };
+
+const jwt = inject('jwt');
+onMounted(() => {
+  initializeTable(jwt);
+});
 </script>
 
 <template>
   <div>
+    <div v-if="jwt === ''" class="unauthorized">
+      Авторизуйтесь, чтобы увидеть таблицу
+    </div>
     <img alt="Data table background" class="game-canvas" draggable="false" src="@/assets/img/int_library_day.jpg"/>
-    <table v-if="items.length !== 0">
+    <table v-if="(items) && items.length !== 0">
       <thead>
       <tr>
         <th>X</th>
@@ -37,13 +63,13 @@ const goToPage = (page) => {
       <tr v-for="item in paginatedItems" :key="item.date">
         <td>{{ item.x }}</td>
         <td>{{ item.y }}</td>
-        <td>{{ item.r }}</td>
-        <td>{{ item.result }}</td>
-        <td>{{ item.date }}</td>
+        <td>{{ item.radius }}</td>
+        <td>{{ item.result ? 'Воланчик отбили' : 'Воланчик унесло ветром' }}</td>
+        <td>{{ new Date(item.send_time).toLocaleString() }}</td>
       </tr>
       </tbody>
     </table>
-    <div v-if="items.length !== 0" class="pagination">
+    <div v-if="items && items.length !== 0" class="pagination">
       <button :disabled="currentPage === 1" @click="goToPage(currentPage - 1)">Назад</button>
       <span>Страница {{ currentPage }} из {{ totalPages }}</span>
       <button :disabled="currentPage === totalPages.value" @click="goToPage(currentPage + 1)">Вперёд</button>
@@ -106,6 +132,17 @@ tbody tr:hover {
 tr:hover td {
   color: #000;
   transition: color 0.3s ease;
+}
+
+.unauthorized {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  font-family: "Century Gothic", sans-serif;
+  color: red;
+  z-index: 1;
 }
 
 .pagination {

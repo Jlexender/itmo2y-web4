@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, provide, ref} from "vue";
+import {onMounted, provide, ref, watch} from "vue";
 import Disclaimer from "@/components/intro/Disclaimer.vue";
 import Splash from "@/components/intro/Splash.vue";
 import Menu from "@/components/menu/Root.vue";
@@ -11,9 +11,9 @@ import Author from "@/components/intro/Author.vue";
 const mode = ref('default');
 const name = ref('cross-fade');
 const views = {
-  'author': Author,
-  'disclaimer': Disclaimer,
-  'splash': Splash,
+  // 'author': Author,
+  // 'disclaimer': Disclaimer,
+  // 'splash': Splash,
   'menu': Menu,
   'game': Game,
 }
@@ -29,6 +29,11 @@ const setScene = (name) => {
 
 const hasAuthenticated = ref(false);
 provide('auth', hasAuthenticated);
+const jwtToken = ref('');
+provide('jwt', jwtToken);
+
+
+
 const showWarn = ref(false);
 const handleStart = () => {
   if (hasAuthenticated.value === true) {

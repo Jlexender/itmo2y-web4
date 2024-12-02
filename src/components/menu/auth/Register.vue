@@ -4,6 +4,7 @@ import {inject, ref} from "vue";
 defineEmits(['toMain', 'toOptions', 'toLogin']);
 
 const hasAuthenticated = inject('auth');
+const jwtToken = inject('jwt');
 
 const loginInput = ref('');
 const passwordInput = ref('');
@@ -39,6 +40,7 @@ const register = async () => {
 
         if (data.error === false) {
           hasAuthenticated.value = true;
+          jwtToken.value = data.token;
         }
       }
     });

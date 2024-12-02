@@ -107,12 +107,14 @@ const checkIfInsideFigure = (x, y, radius) => {
   }
 };
 
+const jwt = inject('jwt');
 const backendIfInsideFigure = async (x, y, radius) => {
   try {
     const response = await fetch('http://localhost:3080/api/check', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${jwt.value}`,
       },
       body: JSON.stringify({
         x: x,
@@ -154,13 +156,13 @@ const handleClick = async (event) => {
 };
 
 const drawCanvasCoords = (ctx, x, y) => {
-  ctx.fillStyle = 'blue';
+  ctx.fillStyle = 'aqua';
   ctx.font = '16px Century Gothic';
   ctx.fillText(`(${x}, ${y})`, x + 10, y - 10);
 };
 
 const drawDot = (ctx, x, y, isInside) => {
-  ctx.fillStyle = isInside ? 'green' : 'red';
+  ctx.fillStyle = isInside ? 'lime' : 'red';
   ctx.beginPath();
   ctx.arc(x, y, 8, 0, 2 * Math.PI);
   ctx.fill();
@@ -175,8 +177,8 @@ const drawUserDots = (ctx) => {
 };
 
 const drawPointCoords = (ctx, x, y) => {
-  ctx.fillStyle = 'blue';
-  ctx.font = '16px Century Gothic';
+  ctx.fillStyle = 'aqua';
+  ctx.font = '24px Century Gothic';
 
   const unit = 100;
   const realX = (x - 400) / unit;
