@@ -114,7 +114,13 @@ const backendIfInsideFigure = async (x, y, radius) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ x, y, radius }),
+      body: JSON.stringify({
+        x: x,
+        y: y,
+        radius: radius,
+        unit_multiplier: 100,
+        canvas_limit: 400,
+      }),
     });
     const data = await response.json();
     return data.result;
@@ -130,7 +136,7 @@ const handleClick = (event) => {
   const x = event.offsetX;
   const y = event.offsetY;
 
-  const isInside = checkIfInsideFigure(x, y, radius.value);
+  const isInside = backendIfInsideFigure(x, y, radius.value);
   const dot = { x, y, isInside };
   userDots.value.push(dot);
 
