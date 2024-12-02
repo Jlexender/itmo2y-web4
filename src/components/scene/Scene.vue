@@ -11,9 +11,9 @@ import Author from "@/components/intro/Author.vue";
 const mode = ref('default');
 const name = ref('cross-fade');
 const views = {
-  // 'author': Author,
-  // 'disclaimer': Disclaimer,
-  // 'splash': Splash,
+  'author': Author,
+  'disclaimer': Disclaimer,
+  'splash': Splash,
   'menu': Menu,
   'game': Game,
 }
