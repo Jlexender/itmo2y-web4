@@ -9,16 +9,14 @@ setTimeout(() => {
 <template>
   <div>
     <div class="author">
-      <img class="author-avatar" src="@/assets/img/142489056.png" alt="avatar">
       <ul>
         <li>ФИО: <strong>Калиев Александр Дмитриевич</strong></li>
         <li>Группа: <strong>P3211</strong></li>
         <li>Вариант: <strong>11501</strong></li>
       </ul>
 
-      Авторы игры:
-      <transition name="fade" appear>
-        <img src="@/assets/img/soviet_games.jpg" class="game-canvas" alt="Developers">
+      <transition appear name="fade">
+        <img alt="Developers" class="game-canvas" src="@/assets/img/soviet_games.jpg">
       </transition>
     </div>
   </div>

@@ -58,13 +58,14 @@ const register = async () => {
 
     <form autocomplete="off">
       <label for="login">Логин</label>
-      <input type="text" id="login" name="login" v-model="loginInput" required> <br>
+      <input id="login" v-model="loginInput" name="login" required type="text"> <br>
       <label for="password">Пароль</label>
-      <input type="password" id="password" name="password" v-model="passwordInput" required> <br>
+      <input id="password" v-model="passwordInput" name="password" required type="password"> <br>
       <label for="password-repeat">Повторите пароль</label>
-      <input type="password" id="password-repeat" name="password-repeat" v-model="passwordRepeatInput" required> <br>
-      <button @click.prevent="register">Зарегистрироваться</button><br/>
-      <div v-text="message" class="msg" style="text-align: center"/>
+      <input id="password-repeat" v-model="passwordRepeatInput" name="password-repeat" required type="password"> <br>
+      <button @click.prevent="register">Зарегистрироваться</button>
+      <br/>
+      <div class="msg" style="text-align: center" v-text="message"/>
     </form>
 
     <nav>

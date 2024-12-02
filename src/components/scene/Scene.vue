@@ -27,7 +27,8 @@ const setScene = (name) => {
   viewId.value = Object.keys(views).findIndex((key) => key === name);
 };
 
-const hasAuthenticated = ref(false); provide('auth', hasAuthenticated);
+const hasAuthenticated = ref(false);
+provide('auth', hasAuthenticated);
 const showWarn = ref(false);
 const handleStart = () => {
   if (hasAuthenticated.value === true) {
@@ -70,11 +71,11 @@ onMounted(() => {
 <template>
   <Cursor/>
   <div class="scene">
-    <transition :name="name" :mode="mode">
+    <transition :mode="mode" :name="name">
       <component :is="views[Object.keys(views)[viewId]]"
                  @toDisclaimer="setScene('disclaimer')"
-                 @toSplash="setScene('splash')"
                  @toMain="setScene('menu')"
+                 @toSplash="setScene('splash')"
                  @toStart="handleStart"
       />
     </transition>

@@ -17,8 +17,8 @@ defineEmits(['toExit', 'toOptions', 'toStart', 'toLogin', 'toTable']);
 
     <MainNav @closeGates="showGate = false"
              @openGates="showGate = true"
-             @toLogin="$emit('toLogin')"
              @toExit="$emit('toExit')"
+             @toLogin="$emit('toLogin')"
              @toOptions="$emit('toOptions')"
              @toStart="$emit('toStart')"
              @toTable="$emit('toTable')"

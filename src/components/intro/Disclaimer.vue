@@ -4,7 +4,7 @@ defineEmits(['toSplash']);
 
 <template>
   <div @click="$emit('toSplash')">
-    <img src="@/assets/img/disclaimer.jpg" alt="Disclaimer" class="game-canvas" draggable="false"/>
+    <img alt="Disclaimer" class="game-canvas" draggable="false" src="@/assets/img/disclaimer.jpg"/>
   </div>
 </template>
 

@@ -59,8 +59,8 @@ defineEmits(['toStart']);
                  @toMain="setView('main')"
                  @toOptions="setView('options')"
                  @toRegister="setView('register')"
-                 @toTable="setView('table')"
                  @toStart="$emit('toStart')"
+                 @toTable="setView('table')"
       />
     </transition>
   </div>

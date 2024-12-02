@@ -13,9 +13,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <img src="@/assets/img/cursor.png" alt="Cursor" class="cursor"
-       :style="{ top: `${event.clientY}px`, left: `${event.clientX}px` }"
-       v-if="show"
+  <img v-if="show" :style="{ top: `${event.clientY}px`, left: `${event.clientX}px` }" alt="Cursor"
+       class="cursor"
+       src="@/assets/img/cursor.png"
   />
 </template>
 

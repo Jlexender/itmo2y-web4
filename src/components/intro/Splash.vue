@@ -33,8 +33,8 @@ setTimeout(() => {
 
 <template>
   <div>
-    <img :src="imgPath" alt="Splashscreen" class="game-canvas" @click="logo = true" draggable="false"/>
-    <transition name="fade" appear>
+    <img :src="imgPath" alt="Splashscreen" class="game-canvas" draggable="false" @click="logo = true"/>
+    <transition appear name="fade">
       <Logo v-if="logo" @click="$emit('toMain')"/>
     </transition>
   </div>

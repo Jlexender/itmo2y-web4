@@ -14,18 +14,18 @@ const hovered = ref(false);
   <div>
     <transition name="fade">
       <div v-if="notSad">
-        <img src="@/assets/img/un_1_body.png" alt="Girl1 body"/>
-        <img src="@/assets/img/un_1_pioneer.png" alt="Girl1 clothes"/>
+        <img alt="Girl1 body" src="@/assets/img/un_1_body.png"/>
+        <img alt="Girl1 clothes" src="@/assets/img/un_1_pioneer.png"/>
 
         <transition name="fade">
-          <img src="@/assets/img/un_1_shy.png" alt="Girl1 shy" v-if="hovered"/>
-          <img src="@/assets/img/un_1_smile.png" alt="Girl1 smile" v-else/>
+          <img v-if="hovered" alt="Girl1 shy" src="@/assets/img/un_1_shy.png"/>
+          <img v-else alt="Girl1 smile" src="@/assets/img/un_1_smile.png"/>
         </transition>
       </div>
       <div v-else>
-        <img src="@/assets/img/un_2_body.png" alt="Girl2 body"/>
-        <img src="@/assets/img/un_2_pioneer.png" alt="Girl2 clothes"/>
-        <img src="@/assets/img/un_2_cry.png" alt="Girl2 sad"/>
+        <img alt="Girl2 body" src="@/assets/img/un_2_body.png"/>
+        <img alt="Girl2 clothes" src="@/assets/img/un_2_pioneer.png"/>
+        <img alt="Girl2 sad" src="@/assets/img/un_2_cry.png"/>
       </div>
     </transition>
     <div class="hover-area" @mouseenter="hovered = true" @mouseleave="hovered = false"/>

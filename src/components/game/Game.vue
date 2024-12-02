@@ -68,8 +68,8 @@ const makeHappy = () => {
 
     <Blank/>
     <Plot
-        @makeSad="makeSad"
         @makeHappy="makeHappy"
+        @makeSad="makeSad"
     />
     <Girl :notSad="notSad"/>
   </div>

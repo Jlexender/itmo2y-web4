@@ -4,8 +4,8 @@
 
 <template>
   <div>
-    <img src="@/assets/img/ext_camp_entrance_day.jpg" alt="UV ground" class="game-canvas" draggable="false"/>
-    <img src="@/assets/img/base.png" alt="Unauthorized" class="game-canvas" draggable="false"/>
+    <img alt="UV ground" class="game-canvas" draggable="false" src="@/assets/img/ext_camp_entrance_day.jpg"/>
+    <img alt="Unauthorized" class="game-canvas" draggable="false" src="@/assets/img/base.png"/>
     <div class="unauthorized">
       <h1>Пожалуйста, авторизуйтесь</h1>
     </div>

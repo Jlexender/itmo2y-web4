@@ -54,22 +54,22 @@ const labelAxis = (ctx) => {
 
   // x-axis labels
   for (let i = 1; i < limit; i++) {
-    ctx.fillText(i, 400 + i*100 - 10, 400 + 20);
+    ctx.fillText(i, 400 + i * 100 - 10, 400 + 20);
   }
 
   // negative x-axis labels
   for (let i = 1; i < limit; i++) {
-    ctx.fillText(-i, 400 - i*100 - 10, 400 + 20);
+    ctx.fillText(-i, 400 - i * 100 - 10, 400 + 20);
   }
 
   // y-axis labels
   for (let i = 1; i < limit; i++) {
-    ctx.fillText(i, 400 - 20, 400 - i*100 + 10);
+    ctx.fillText(i, 400 - 20, 400 - i * 100 + 10);
   }
 
   // negative y-axis labels
   for (let i = 1; i < limit; i++) {
-    ctx.fillText(-i, 400 - 20, 400 + i*100 + 10);
+    ctx.fillText(-i, 400 - 20, 400 + i * 100 + 10);
   }
 };
 
@@ -77,33 +77,33 @@ const drawFigure = (ctx, radius) => {
   const x = 400;
   const y = 400;
 
-  const unit = 100*radius;
+  const unit = 100 * radius;
 
   const polyline = [
-    { x: x - unit, y: y - unit },
-    { x: x - unit, y: y },
-    { x: x, y: y + unit/2 },
-    { x: x, y: y - unit },
+    {x: x - unit, y: y - unit},
+    {x: x - unit, y: y},
+    {x: x, y: y + unit / 2},
+    {x: x, y: y - unit},
   ];
 
   drawPolyline(ctx, polyline);
 
   const startAngle = 0;
-  const endAngle = Math.PI/2;
-  drawArc(ctx, x, y, unit/2, startAngle, endAngle);
+  const endAngle = Math.PI / 2;
+  drawArc(ctx, x, y, unit / 2, startAngle, endAngle);
 };
 
 const checkIfInsideFigure = (x, y, radius) => {
-  const unit = 100*radius;
+  const unit = 100 * radius;
 
   if (x > 400 && y < 400) {
     return false;
   } else if (x <= 400 && y >= 400) {
-    return 2*(y - 400) <= (x - 400) + unit;
+    return 2 * (y - 400) <= (x - 400) + unit;
   } else if (x < 400 && y < 400) {
     return x > 400 - unit && y > 400 - unit;
   } else {
-    return (400 - x)**2 + (400 - y)**2 < (unit/2)**2;
+    return (400 - x) ** 2 + (400 - y) ** 2 < (unit / 2) ** 2;
   }
 };
 
@@ -138,7 +138,7 @@ const handleClick = async (event) => {
 
   const isInside = await backendIfInsideFigure(x, y, radius.value);
 
-  const dot = { x, y, isInside };
+  const dot = {x, y, isInside};
   userDots.value.push(dot);
 
   if (isInside) {
@@ -202,7 +202,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <canvas ref="canvasRef" width="800" height="800" @click="handleClick"></canvas>
+  <canvas ref="canvasRef" height="800" width="800" @click="handleClick"></canvas>
 </template>
 
 <style scoped>

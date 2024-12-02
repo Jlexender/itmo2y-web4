@@ -1,10 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue';
+import {computed, ref} from 'vue';
 
 const itemsPerPage = 8;
 const currentPage = ref(1);
-const items = ref([
-]);
+const items = ref([]);
 
 const totalPages = computed(() => Math.ceil(items.value.length / itemsPerPage));
 
@@ -23,7 +22,7 @@ const goToPage = (page) => {
 
 <template>
   <div>
-    <img src="@/assets/img/int_library_day.jpg" alt="Data table background" class="game-canvas" draggable="false"/>
+    <img alt="Data table background" class="game-canvas" draggable="false" src="@/assets/img/int_library_day.jpg"/>
     <table v-if="items.length !== 0">
       <thead>
       <tr>
@@ -44,10 +43,10 @@ const goToPage = (page) => {
       </tr>
       </tbody>
     </table>
-    <div class="pagination">
-      <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1">Назад</button>
+    <div v-if="items.length !== 0" class="pagination">
+      <button :disabled="currentPage === 1" @click="goToPage(currentPage - 1)">Назад</button>
       <span>Страница {{ currentPage }} из {{ totalPages }}</span>
-      <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages.value">Вперёд</button>
+      <button :disabled="currentPage === totalPages.value" @click="goToPage(currentPage + 1)">Вперёд</button>
     </div>
     <div class="to-menu" @click="$emit('toMain')">
       В меню

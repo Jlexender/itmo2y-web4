@@ -1,5 +1,5 @@
 <script setup>
-import {h, inject, ref} from "vue";
+import {inject, ref} from "vue";
 
 defineEmits(['toMain', 'toOptions', 'toRegister']);
 
@@ -65,14 +65,15 @@ const handleLogout = () => {
 
     <form autocomplete="off">
       <label for="login">Логин</label>
-      <input type="text" id="login" name="login" v-model="loginInput" required> <br>
+      <input id="login" v-model="loginInput" name="login" required type="text"> <br>
       <label for="password">Пароль</label>
-      <input type="password" id="password" name="password" v-model="passwordInput" required> <br>
+      <input id="password" v-model="passwordInput" name="password" required type="password"> <br>
       <div class="button-list">
-        <button @click.prevent="login">Войти</button><br/>
+        <button @click.prevent="login">Войти</button>
+        <br/>
         <button v-if="hasAuthenticated" @click.prevent="handleLogout">Выход</button>
       </div>
-      <div v-text="message" style="text-align: center"/>
+      <div style="text-align: center" v-text="message"/>
     </form>
 
     <div class="go-back" @click="$emit('toMain')">
@@ -89,6 +90,7 @@ const handleLogout = () => {
   justify-content: center;
   gap: 40px;
 }
+
 header {
   position: absolute;
   font-size: 58px;
