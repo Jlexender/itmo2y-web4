@@ -1,5 +1,6 @@
 <script setup>
 import {inject, onMounted, ref, watch} from "vue";
+import { BACKEND_URL} from "@/api.config.js";
 
 const radius = inject('cRadius');
 const limit = 5;
@@ -110,7 +111,7 @@ const checkIfInsideFigure = (x, y, radius) => {
 const jwt = inject('jwt');
 const backendIfInsideFigure = async (x, y, radius) => {
   try {
-    const response = await fetch('http://localhost:3080/api/check', {
+    const response = await fetch(`${BACKEND_URL}/api/check`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -119,7 +120,7 @@ const backendIfInsideFigure = async (x, y, radius) => {
       body: JSON.stringify({
         x: x,
         y: y,
-        radius: parseInt(radius),
+        radius: parseFloat(radius),
         unit_multiplier: 100,
         canvas_limit: 400,
       }),
@@ -132,7 +133,12 @@ const backendIfInsideFigure = async (x, y, radius) => {
   }
 };
 
+const volume = inject('volume');
 const handleClick = async (event) => {
+  const tennisServe = new Audio(new URL('@/assets/audio/tennis_serve_1.ogg', import.meta.url));
+  tennisServe.volume = volume.value;
+  tennisServe.play();
+
   const canvas = canvasRef.value;
   const ctx = canvas.getContext('2d');
   const x = event.offsetX;

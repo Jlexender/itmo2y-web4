@@ -1,5 +1,6 @@
 <script setup>
 import {inject, ref} from "vue";
+import {BACKEND_URL} from "@/api.config.js";
 
 defineEmits(['toMain', 'toOptions', 'toLogin']);
 
@@ -21,7 +22,7 @@ const register = async () => {
     return;
   }
   try {
-    await fetch('http://localhost:3080/api/auth/register', {
+    await fetch(`${BACKEND_URL}/api/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

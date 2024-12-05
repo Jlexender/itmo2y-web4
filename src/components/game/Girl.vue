@@ -14,18 +14,20 @@ const hovered = ref(false);
   <div>
     <transition name="fade">
       <div v-if="notSad">
-        <img alt="Girl1 body" src="@/assets/img/un_1_body.png"/>
-        <img alt="Girl1 clothes" src="@/assets/img/un_1_pioneer.png"/>
+        <img alt="Girl1 body" src="@/assets/img/un_1_body.png" draggable="false"/>
+	<!-- <img alt="Girl1 clothes" src="@/assets/img/un_1_pioneer.png" draggable="false"/> -->
+	<img alt="Girl1 clothes" src="@/assets/img/un_1_sport.png" draggable="false"/> 
 
         <transition name="fade">
-          <img v-if="hovered" alt="Girl1 shy" src="@/assets/img/un_1_shy.png"/>
-          <img v-else alt="Girl1 smile" src="@/assets/img/un_1_smile.png"/>
+          <img v-if="hovered" alt="Girl1 shy" src="@/assets/img/un_1_shy.png" draggable="false"/>
+          <img v-else alt="Girl1 smile" src="@/assets/img/un_1_smile.png" draggable="false"/>
         </transition>
       </div>
       <div v-else>
-        <img alt="Girl2 body" src="@/assets/img/un_2_body.png"/>
-        <img alt="Girl2 clothes" src="@/assets/img/un_2_pioneer.png"/>
-        <img alt="Girl2 sad" src="@/assets/img/un_2_cry.png"/>
+        <img alt="Girl2 body" src="@/assets/img/un_2_body.png" draggable="false"/>
+	<!--  <img alt="Girl2 clothes" src="@/assets/img/un_2_pioneer.png" draggable="false"/> -->
+	<img alt="Girl2 clothes" src="@/assets/img/un_2_sport.png" draggable="false"/>
+        <img alt="Girl2 sad" src="@/assets/img/un_2_cry.png" draggable="false"/>
       </div>
     </transition>
     <div class="hover-area" @mouseenter="hovered = true" @mouseleave="hovered = false"/>

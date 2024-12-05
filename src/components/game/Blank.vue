@@ -1,38 +1,61 @@
 <script setup>
-import {inject, ref} from 'vue';
+import { inject, ref, onMounted } from 'vue';
 
 const radius = inject('cRadius');
 
-const data = ref([1, 2, 3, 4]);
+const value = ref(1);
+
 const selectRadius = (event) => {
+  radius.value = event.target.value;
+};
 
-  const items = document.querySelectorAll('li');
-  items.forEach(item => item.style.color = '');
-  event.target.style.color = 'blue';
-  radius.value = event.target.textContent;
-}
-
-
+onMounted(() => {
+  radius.value = value.value;
+});
 </script>
 
 <template>
   <div class="container">
-    <ul>
-      <li v-for="item in data" :key="item" @click="selectRadius">{{ item }}</li>
-    </ul>
+    <input 
+      type="range" 
+      min="1" 
+      max="4" 
+      step="0.01"
+      v-model="value" 
+      @input="selectRadius" 
+      class="slider" 
+    />
+    <div class="value-display">{{ value }}</div>
   </div>
 </template>
 
 <style scoped>
-ul {
-  position: absolute;
-  list-style-type: none;
-  right: 3%;
+.container {
+  position: relative;
 }
 
-li {
+.slider {
+  position: absolute;
+  top: 200px;
+  right: -100px;
+  writing-mode: bt-lr;
+  width: 400px; 
+  height: 100px;
+  transform: rotate(-90deg);
+  border-radius: 5px;
+  cursor: none;
+}
+
+.value-display {
+  position: absolute;
+  top: 470px; 
+  right: 78px;
+  width: 50px;
+  font-weight: bold;
   font-family: "Century Gothic", sans-serif;
-  font-size: 72px;
-  transition: color 0.5s ease;
+  font-size: 24px;
+  text-align: center;
+  color: white;
 }
 </style>
+

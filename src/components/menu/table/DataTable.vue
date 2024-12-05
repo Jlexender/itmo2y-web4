@@ -1,9 +1,10 @@
 <script setup>
 import { computed, inject, onMounted, ref } from 'vue';
+import {BACKEND_URL} from "@/api.config.js";
 
 const initializeTable = async (jwt) => {
   try {
-    const response = await fetch('http://localhost:3080/api/checks', {
+    const response = await fetch(`${BACKEND_URL}/api/checks`, {
       method: 'GET',
       headers: {
         'Authorization': `${jwt.value}`
